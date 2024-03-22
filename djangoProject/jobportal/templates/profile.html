@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    #profile-container {
+      max-width: 600px;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    #profile-image {
+      max-width: 50%;
+      border-radius: 70%;
+      margin-bottom: 10px;
+    }
+
+    #change-password-form {
+      margin-top: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #contact-info {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="profile-container">
+  <img id="profile-image" src="https://media.licdn.com/dms/image/C4D12AQFBwRUfyBn5yQ/article-cover_image-shrink_600_2000/0/1520110535291?e=2147483647&v=beta&t=9zFPqxuqLOcN0xHA_v5jHZVEW5WNLMxhVCj4eOOwJFI" alt="Profile Photo">
+  <h2>Username: lorem ipsum</h2>
+
+  <div id="change-password-form">
+    <h3>Change Password</h3>
+    <form action="#" method="post">
+      <div class="form-group">
+        <label for="current-password">Current Password:</label>
+        <input type="password" id="current-password" name="current-password" value="1234"required>
+      </div>
+      <div class="form-group">
+        <label for="new-password">New Password:</label>
+        <input type="password" id="new-password" name="new-password" required>
+      </div>
+      <div class="form-group">
+        <label for="confirm-password">Confirm Password:</label>
+        <input type="password" id="confirm-password" name="confirm-password" required>
+      </div>
+      <button type="submit">Change Password</button>
+    </form>
+  </div>
+
+  <div id="contact-info">
+    <h3>Contact Information</h3>
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" value="mno@example.com" required>
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone:</label>
+      <input type="tel" id="phone" name="phone" value="+1 234 567 890" required>
+    </div>
+  </div>
+
+  <button id="update-profile-button" onclick="updateProfile()">Update Profile</button>
+</div>
+
+<script>
+  function updateProfile() {
+    // Add logic to update the user's profile information
+    alert('Profile updated successfully!');
+  }
+</script>
+
+</body>
+</html>
+
+

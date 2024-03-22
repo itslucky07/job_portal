@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    </header>
+    <section id="about">
+    <h2 style="color: white;">Lorem ipsum dolor sit amet, </h2>
+        <img class="animated-image" src=" " alt="img">
+        <div class="about-content animated-content">
+            <p>Lorem ipsum dolor sit amet, </p>
+            <p><strongLorem ipsum dolor sit amet,></strong></p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <img class="animated-image" src="https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/mcaps-mdcs-wallpaper-two-people-talking-2:VP2-859x540" alt="img">
+        <div class="education animated-content">
+            <h3>Education</h3>
+            <ul>
+                <li>DDS – UMKC School of Colles,London</li>
+                <li>MS, University of Missouri, KC</li>
+            </ul>
+        </div>
+        <img class="animated-image" src=" " alt="img">
+        <div class="contact-info animated-content">
+            <h3>Contact Information</h3>
+            <p>6416 N. Cosby Ave. Kansas City, MO 64151</p>
+            <p>Get Directions</p>
+            <p>(816) 587-6444</p>
+            <p></p>
+            <p></p>
+        </div>
+        <!-- Add images below -->
+        <div class="images animated-images">
+            <img src="https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/O2019-Hero-image-x2:VP1-539x440?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=1920&hei=720&qlt=75&fit=constrain" alt="Image 1">
+            <img src="https://www.microsoft.com/en-us/microsoft-365/blog/wp-content/uploads/sites/2/2021/11/WIN22_HybridWork_010.jpg" alt="Image 2">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS40ncButEYMP_aOCKbsnjmhmIckWP6Umge842Hf3-XdptEmXD6pXIrE2gpT-9DAIdipp4&usqp=CAU" alt="Image 3">
+            <img src="https://blogs.microsoft.com/wp-content/uploads/prod/2021/09/9_7-2970643732-Hybrid-work-Lead.jpg" alt="Image 4">
+            <img src="https://media.product.which.co.uk/prod/images/original/a7aca8330298-istock-1140849012.jpg" alt="Image 5">
+        </div>
+    </section>
+</body>
+</html>
+<?php @include('footer.php'); ?>
+
+<style>
+
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background: url('images/dentist.jpg') no-repeat;
+    background-size: cover;
+}
+
+/* Header styles */
+h2 {
+    color: #007acc;
+    font-size: 24px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+/* Image styles */
+img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+/* About section styles */
+.about-content {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+}
+
+.about-content p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-top: 20px;
+}
+
+.about-content strong {
+    color: #007acc;
+}
+
+/* Education section styles */
+.education {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+}
+
+.education h3 {
+    color: #007acc;
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+.education ul {
+    list-style: none;
+    margin-left: 20px;
+}
+
+.education li {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-top: 10px;
+}
+
+/* Contact info section styles */
+.contact-info {
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+}
+
+.contact-info h3 {
+    color: #007acc;
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+.contact-info p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-top: 10px;
+}
+
+/* Image section styles */
+.images {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    height: 50%;
+}
+
+.images img {
+    flex: 0 0 calc(20% - 20px);
+    max-width: calc(20% - 20px);
+    margin-bottom: 20px;
+}
+
+/* Footer styles */
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #007acc;
+    color: #fff;
+}
+/* Apply styles for the About Us section */
+#about {
+    text-align: center;
+    padding: 20px;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Apply styles for animated images */
+.animated-image {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 20px;
+    animation: scaleUp 0.5s ease-in-out forwards;
+}
+
+/* Apply styles for animated content */
+.animated-content {
+    animation: fadeIn 1s ease-in-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+    margin-top: 20px;
+    text-align: left;
+}
+
+/* Apply styles for animated images container */
+.animated-images {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    animation: fadeIn 1s ease-in-out forwards;
+    opacity: 0;
+}
+
+/* Define animations */
+@keyframes scaleUp {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Apply styles for the About Us section */
+#about {
+    text-align: center;
+    padding: 20px;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Apply styles for animated images */
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.animated-image {
+    max-width: 50%;
+    height: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px;
+    animation: fadeIn 1s ease-in-out forwards, scaleUp 0.5s ease-in-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Define animations */
+@keyframes scaleUp {
+    0% {
+        transform: scale(0.8);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+/* Apply styles for clicked images */
+.clicked {
+    animation: none; /* Disable the scaleUp animation */
+    transform: scale(0.9); /* Optionally, shrink the image on click */
+}
+</style>

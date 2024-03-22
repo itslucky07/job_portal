@@ -1,0 +1,38 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'navigation.html' %}
+
+    <marquee style="font-family:Monospaced; font-size: 25px; color: aliceblue; background-color: black; font-weight: bold; margin-top: 1%">
+        User Login
+    </marquee>
+<hr>
+    <form class="container mt-5 " method="post">
+        {% csrf_token %}
+        <label><b>email id</b></label>
+            <input type="email" class="form-control" name="username" placeholder="Enter email id">
+        <label><b>password</b></label>
+            <input type="password" class="form-control" name="password" placeholder="Enter Password">
+
+        <input type="Submit"  value="Login" class="btn btn-primary" style="margin-top: 2%; color: aliceblue ; height:70px ;font-size: 20px">
+        <a href="{% url 'user_signup' %}" class="btn btn-primary" style="margin-top: 2%; color: aliceblue ; height:70px ;font-size: 20px">create account</a>
+
+    </form>
+
+{% include 'footer.html' %}
+
+    {% if error == "no" %}
+    <script>
+        alert("Login successfull");
+        window.location=('{% url 'user_home' %}')
+    </script>
+    {% endif %}
+
+    {% if error == "yes" %}
+    <script>
+        alert("Invalid Login credentials");
+    </script>
+    {% endif %}
+
+{% endblock %}

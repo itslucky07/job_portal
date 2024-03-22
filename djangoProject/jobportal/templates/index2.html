@@ -1,0 +1,153 @@
+{% load static %}
+
+{% block body %}
+
+{% include 'navigation.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Swish Dental Clinic</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+    </header>
+    <section id="home">
+        <img src="{% static 'images/blog-recent-5.jpg' %}">
+        <div class="home-content">
+            <h1>Welcome to Job Portal</h1>
+            <p>Where recriuters meets the seekers.</p>
+            <p>Find the most excitig of the jobs with us</p>
+                <p>Your smile is Awesome!</p>
+                <p>Searching for a job find the most exciting of the ones here</p>
+                <p>The easiest way to get the new job</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="gallery">
+        <div class="image-card">
+            <img src="{% static 'images/home-blog2.jpg' %}">
+            <h2>Amazon</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+        <div class="image-card">
+            <img src="{% static 'images/home-blog1.jpg' %}">
+            <h2>Google</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+        <div class="image-card">
+            <img src="{% static 'images/g8.jpg' %}">
+            <h2>Meta</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+        <div class="image-card">
+            <img src="{% static 'images/blog-author-2.jpg' %}">
+            <h2>microsoft</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+        <div class="image-card">
+            <img src="{% static 'images/blog-1.jpg' %}" alt="brushing the teeth">
+            <h2>oracle</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+        <div class="image-card">
+            <img src="{% static 'images/team-3.jpg' %}" alt="brushing the teeth">
+            <h2>ABC</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+    </section>
+</body>
+</html>
+
+<style>
+/* Reset some default styles */
+body, h1, h2, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Apply styles to the home section */
+#home {
+    text-align: center;
+    padding: 50px;
+    background-color: #f3f3f3;
+}
+
+#home img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 67px;
+}
+
+.home-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.home-content h1 {
+    font-size: 36px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.home-content p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.quote {
+    background-color: white;
+    color: #fff;
+    padding: 30px;
+    border-radius: 70px;
+}
+.quote:hover {
+    background-color: black;
+}
+
+
+/* Apply styles to the image gallery section */
+#gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.image-card {
+    flex: 0 1 calc(33.33% - 20px);
+    margin-bottom: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.image-card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.image-card h2 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.image-card p {
+    font-size: 16px;
+    color: #666;
+}
+</style>
+
+{% include 'footer.html' %}
+{% endblock %}
