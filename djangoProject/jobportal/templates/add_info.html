@@ -3,6 +3,42 @@
 
 {% block title %}Build Resume | Job Portal{% endblock %}
 
+{% block extra_css %}
+<style>
+    .resume-preview-card {
+        background: #ffffff;
+        border-radius: var(--border-radius);
+        border: 1px solid #e2e8f0;
+        box-shadow: var(--shadow-lg);
+        padding: 2.5rem;
+        position: sticky;
+        top: 2rem;
+        transition: all 0.3s ease;
+    }
+
+    .resume-preview-section-header {
+        border-bottom: 2px solid var(--primary);
+        padding-bottom: 0.35rem;
+        margin-top: 1.5rem;
+        margin-bottom: 0.85rem;
+        font-weight: 700;
+        font-size: 1.05rem;
+        color: var(--secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .resume-preview-value {
+        color: var(--text-main);
+        font-size: 0.92rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+        white-space: pre-wrap;
+        word-break: break-word;
+    }
+</style>
+{% endblock %}
+
 {% block body %}
     <!-- Navigation -->
     {% include 'user_navigation.html' %}
@@ -11,18 +47,19 @@
     <div class="page-header-container animate-fade-in">
         <div class="container">
             <h1 class="page-header-title">Build Resume</h1>
-            <p class="page-header-subtitle">Update your professional details to attract top recruiters.</p>
+            <p class="page-header-subtitle">Update your professional details and preview your resume in real time.</p>
         </div>
     </div>
 
-    <!-- Resume Editor Form -->
-    <div class="container animate-fade-in" style="animation-delay: 0.1s; margin-bottom: 3rem;">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="card-custom p-4 p-md-5">
+    <!-- Resume Editor Form & Live Preview Side-by-Side -->
+    <div class="container-fluid animate-fade-in" style="animation-delay: 0.1s; margin-bottom: 4rem; max-width: 1400px; padding-left: 2rem; padding-right: 2rem;">
+        <div class="row">
+            <!-- Left Side - Form Editor -->
+            <div class="col-lg-6 mb-4">
+                <div class="card-custom p-4 p-md-5" style="height: 100%;">
                     <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h3 class="font-weight-bold mb-0" style="color: var(--secondary); letter-spacing: -0.02em;">Resume Credentials</h3>
-                        <a href="{% url 'resume' %}" class="btn-premium px-3 py-2" style="font-size: 0.85rem;"><i class="fas fa-file-pdf mr-1"></i> Preview Resume</a>
+                        <h3 class="font-weight-bold mb-0" style="color: var(--secondary); letter-spacing: -0.02em;">Edit Resume details</h3>
+                        <a href="{% url 'resume' %}" class="btn-premium px-3 py-2" style="font-size: 0.85rem;" target="_blank"><i class="fas fa-print mr-1"></i> Print / PDF</a>
                     </div>
                     
                     <form name="signup" method="post" enctype="multipart/form-data">
@@ -68,6 +105,40 @@
                     </form>
                 </div>
             </div>
+
+            <!-- Right Side - Live Preview Document -->
+            <div class="col-lg-6 mb-4">
+                <div class="resume-preview-card">
+                    <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+                        <div>
+                            <h2 class="font-weight-bold text-dark mb-1" style="font-size: 1.85rem; letter-spacing: -0.025em;">{{ student.user.first_name }} {{ student.user.last_name }}</h2>
+                            <div id="preview-role" class="text-primary font-weight-bold mb-2" style="font-size: 0.95rem;">{{ resume.project|default:"Target Role" }}</div>
+                            <div class="text-muted" style="font-size: 0.85rem; line-height: 1.5;">
+                                <div class="mb-1"><i class="fas fa-envelope mr-1 text-muted"></i> {{ student.user.username }}</div>
+                                <div class="mb-1"><i class="fas fa-phone mr-1 text-muted"></i> {{ student.mobile }}</div>
+                                <div><i class="fas fa-map-marker-alt mr-1 text-muted"></i> <span id="preview-location">{{ resume.location|default:"Location" }}</span></div>
+                            </div>
+                        </div>
+                        <span class="badge badge-success p-2" style="font-size: 0.75rem; font-weight: 600;"><i class="fas fa-sync-alt fa-spin mr-1"></i> Live Preview</span>
+                    </div>
+
+                    <!-- Professional Summary -->
+                    <h4 class="resume-preview-section-header">Professional Summary</h4>
+                    <div id="preview-description" class="resume-preview-value">{{ resume.description|default:"Your summary will appear here..." }}</div>
+
+                    <!-- Skills -->
+                    <h4 class="resume-preview-section-header">Skills</h4>
+                    <div id="preview-skills" class="resume-preview-value">{{ resume.skills|default:"Your skills will appear here..." }}</div>
+
+                    <!-- Experience -->
+                    <h4 class="resume-preview-section-header">Professional Experience</h4>
+                    <div id="preview-experience" class="resume-preview-value">{{ resume.experience|default:"Your experience summary will appear here..." }}</div>
+
+                    <!-- Project -->
+                    <h4 class="resume-preview-section-header">Key Projects</h4>
+                    <div id="preview-project" class="resume-preview-value">{{ resume.project|default:"Your key projects will appear here..." }}</div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -83,4 +154,41 @@
         alert("Something went wrong. Please try again.");
     </script>
     {% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    $(document).ready(function() {
+        // Form inputs
+        var $locationInput = $('#location');
+        var $skillsInput = $('#skills');
+        var $projectInput = $('#project');
+        var $experienceInput = $('#experience');
+        var $descriptionInput = $('#description');
+
+        // Preview nodes
+        var $previewLocation = $('#preview-location');
+        var $previewSkills = $('#preview-skills');
+        var $previewProject = $('#preview-project');
+        var $previewExperience = $('#preview-experience');
+        var $previewDescription = $('#preview-description');
+        var $previewRole = $('#preview-role');
+
+        // Function to update the live preview panel
+        function updateLivePreview() {
+            $previewLocation.text($locationInput.val() || 'Location not specified');
+            $previewSkills.text($skillsInput.val() || 'Skills not specified');
+            $previewProject.text($projectInput.val() || 'Projects not specified');
+            $previewExperience.text($experienceInput.val() || 'Experience not specified');
+            $previewDescription.text($descriptionInput.val() || 'Summary not specified');
+            $previewRole.text($projectInput.val() || 'Target Role / Title');
+        }
+
+        // Bind keyboard and change listeners to form inputs
+        $('input, textarea').on('input propertychange change keyup', updateLivePreview);
+
+        // Run once on load to populate initial state
+        updateLivePreview();
+    });
+</script>
 {% endblock %}
