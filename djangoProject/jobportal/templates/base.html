@@ -126,41 +126,31 @@
 
         /* Custom Section Titles (Replacing Marquees) */
         .page-header-container {
-            background: var(--accent-grad);
-            color: #ffffff;
-            padding: 3rem 0;
-            text-align: center;
-            border-radius: 0 0 24px 24px;
-            box-shadow: var(--shadow-md);
+            background: #ffffff;
+            color: var(--text-main);
+            padding: 1.75rem 0;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
             margin-bottom: 2rem;
             position: relative;
-            overflow: hidden;
         }
 
         .page-header-container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -30%;
-            width: 80%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
-            transform: rotate(-15deg);
-            pointer-events: none;
+            display: none;
         }
 
         .page-header-title {
-            font-size: 2.25rem;
+            font-size: 1.85rem;
             font-weight: 700;
             margin: 0;
-            letter-spacing: -0.03em;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: var(--secondary);
+            letter-spacing: -0.02em;
         }
 
         .page-header-subtitle {
-            font-size: 1.05rem;
-            color: rgba(255, 255, 255, 0.85);
-            margin-top: 0.5rem;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
             font-weight: 400;
         }
 
