@@ -1,56 +1,64 @@
+{% extends 'base.html' %}
 {% load static %}
 
+{% block title %}Rejected Recruiters | Job Portal{% endblock %}
+
 {% block body %}
+    <!-- Navigation -->
+    {% include 'admin_navigation.html' %}
 
-{% include 'admin_navigation.html' %}
+    <!-- Header Title -->
+    <div class="page-header-container animate-fade-in">
+        <div class="container">
+            <h1 class="page-header-title">Rejected Recruiters</h1>
+            <p class="page-header-subtitle">Recruiter accounts that have been rejected or disabled.</p>
+        </div>
+    </div>
 
-<marquee style="font-family: Monospaced; font-size: 25px; color: aliceblue; background-color: black; font-weight: bold; margin-top: 1%">
-    View Recruite - Rejected
-</marquee>
-<hr>
-<div class="container">
+    <!-- Main Table Area -->
+    <div class="container animate-fade-in" style="animation-delay: 0.1s; margin-bottom: 3rem;">
+        <div class="table-premium-container">
+            <table class="table table-hover table-premium" id="example">
+                <thead>
+                    <tr>
+                        <th class="text-center">Sr.No</th>
+                        <th class="text-center">Logo</th>
+                        <th class="text-center">Full Name</th>
+                        <th class="text-center">Email ID</th>
+                        <th class="text-center">Contact No</th>
+                        <th class="text-center">Company</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
 
-<table class="table table-hover " id="example">
-    <thead>
-        <tr style="background-color:#055698; color: white">
-            <th  class="text-center">Sr.No</th>
-            <th  class="text-center">Full Name</th>
-            <th  class="text-center">Email Id</th>
-            <th  class="text-center">Contact No.</th>
-            <th  class="text-center">Gender</th>
-            <th  class="text-center">Company</th>
-            <th  class="text-center">Image</th>
-            <th  class="text-center">Status</th>
-            <th  class="text-center">Action</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        {% for student in data %}
-        <tr style="background-color:#DEB887">
-            <td class="text-center">{{ forloop.counter }}</td>
-            <td class="text-center">{{ student.user.first_name }} {{ student.user.last_name }}</td>
-            <td class="text-center">{{ student.user.username }}</td>
-            <td class="text-center">{{ student.mobile }}</td>
-            <td class="text-center">{{ student.gender }}</td>
-            <td class="text-center">{{ student.company }}</td>
-                 
-            <td class="text-center" >
-                {% if student.image %}
-                    <img src="{{ student.image.url }}" style="width: 50px; height: 50px; border-radius: 50%">
-                {% else %}
-                    No Image Available
-                {% endif %}
-            </td>
-            <td class="text-center">{{ student.status }}</td>
-            <td class="text-center"> <a href="{% url 'change_status' student.id %}" class="btn btn-success btn-sm">Change Status</a>
-                </td> <!-- Add your action button here -->
-
-                
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-</div>
-
+                <tbody>
+                    {% for student in data %}
+                    <tr>
+                        <td class="text-center font-weight-bold" style="color: var(--text-muted);">{{ forloop.counter }}</td>
+                        <td class="text-center">
+                            {% if student.image %}
+                                <img src="{{ student.image.url }}" style="width: 45px; height: 45px; border-radius: 8px; object-fit: cover; border: 1px solid #e2e8f0;">
+                            {% else %}
+                                <span class="badge badge-light text-muted p-2"><i class="fas fa-building mr-1"></i> None</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-center font-weight-bold text-dark">{{ student.user.first_name }} {{ student.user.last_name }}</td>
+                        <td class="text-center" style="color: var(--primary);">{{ student.user.username }}</td>
+                        <td class="text-center">{{ student.mobile }}</td>
+                        <td class="text-center font-weight-bold">{{ student.company }}</td>
+                        <td class="text-center">
+                            <span class="badge badge-premium badge-premium-reject"><i class="fas fa-times-circle mr-1"></i> Rejected</span>
+                        </td>
+                        <td class="text-center">
+                            <a href="{% url 'change_status' student.id %}" class="btn-premium py-1 px-3" style="font-size: 0.85rem;">
+                                <i class="fas fa-edit mr-1"></i> Change Status
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}

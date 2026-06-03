@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Profile | Job Portal{% endblock %}
+
+{% block extra_css %}
+<style>
+    .profile-card {
+        background: #ffffff;
+        border-radius: var(--border-radius);
+        border: 1px solid #e2e8f0;
+        box-shadow: var(--shadow-md);
+        padding: 2.5rem 2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    
+    .profile-avatar-container {
+        position: relative;
+        width: 140px;
+        height: 140px;
+        margin: 0 auto 1.5rem auto;
+    }
+
+    .profile-avatar {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #f1f5f9;
+        box-shadow: var(--shadow-md);
+    }
+
+    .profile-details-list {
+        text-align: left;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #f1f5f9;
+    }
+
+    .profile-details-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.75rem;
+        font-size: 0.95rem;
+    }
+
+    .profile-details-label {
+        font-weight: 600;
+        color: var(--text-muted);
+    }
+
+    .profile-details-value {
+        color: var(--secondary);
+        font-weight: 500;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+    <!-- Navigation -->
+    {% include 'user_navigation.html' %}
+
+    <!-- Header Title -->
+    <div class="page-header-container animate-fade-in">
+        <div class="container">
+            <h1 class="page-header-title">My Profile</h1>
+            <p class="page-header-subtitle">Manage your personal details and account profile picture.</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container animate-fade-in" style="animation-delay: 0.1s; margin-bottom: 3rem;">
+        <div class="row">
+            <!-- Left Side: Profile Preview -->
+            <div class="col-lg-4">
+                <div class="profile-card">
+                    <div class="profile-avatar-container">
+                        {% if student.image %}
+                            <img src="{{ student.image.url }}" class="profile-avatar" alt="Avatar">
+                        {% else %}
+                            <div class="profile-avatar d-flex align-items-center justify-content-center bg-light text-muted">
+                                <i class="fas fa-user-graduate fa-3x"></i>
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <h4 class="font-weight-bold mb-1" style="color: var(--secondary);">{{ student.user.first_name }} {{ student.user.last_name }}</h4>
+                    <p class="text-muted mb-0" style="font-size: 0.9rem;">{{ student.user.username }}</p>
+                    
+                    <div class="profile-details-list">
+                        <div class="profile-details-item">
+                            <span class="profile-details-label">Mobile:</span>
+                            <span class="profile-details-value">{{ student.mobile }}</span>
+                        </div>
+                        <div class="profile-details-item">
+                            <span class="profile-details-label">Gender:</span>
+                            <span class="profile-details-value">
+                                {% if student.gender == "Male" %}
+                                    <span class="badge badge-info badge-premium"><i class="fas fa-mars mr-1"></i> Male</span>
+                                {% else %}
+                                    <span class="badge badge-danger badge-premium" style="background-color: #fce7f3; color: #db2777;"><i class="fas fa-venus mr-1"></i> Female</span>
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side: Edit Form -->
+            <div class="col-lg-8">
+                <div class="card-custom p-4 p-md-5">
+                    <h3 class="font-weight-bold mb-4" style="color: var(--secondary); letter-spacing: -0.02em;">Edit Profile Settings</h3>
+                    
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label for="fname">First Name</label>
+                                <input type="text" class="form-control" id="fname" name="fname" value="{{ student.user.first_name }}" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="lname">Last Name</label>
+                                <input type="text" class="form-control" id="lname" name="lname" value="{{ student.user.last_name }}" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label for="contact">Contact Number</label>
+                                <input type="text" class="form-control" id="contact" name="contact" value="{{ student.mobile }}" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="email">Email Address (Read-only)</label>
+                                <input type="email" class="form-control" id="email" value="{{ student.user.username }}" readonly style="background-color: #f1f5f9; cursor: not-allowed;">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label for="image">Change Profile Image</label>
+                                <input type="file" class="form-control-file" id="image" name="image" accept="image/*">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label class="d-block">Gender</label>
+                                <div class="form-check form-check-inline mt-1">
+                                    <input type="radio" id="male" name="gender" class="form-check-input" value="Male" {% if student.gender == "Male" %}checked{% endif %}>
+                                    <label class="form-check-label font-weight-normal" for="male">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline mt-1">
+                                    <input type="radio" id="female" name="gender" class="form-check-input" value="Female" {% if student.gender == "Female" %}checked{% endif %}>
+                                    <label class="form-check-label font-weight-normal" for="female">Female</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-premium btn-block mt-4"><i class="fas fa-save mr-2"></i> Save Profile Settings</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if error == "no" %}
+    <script>
+        alert("Profile updated successfully");
+        window.location = '{% url 'user_dashboard' %}';
+    </script>
+    {% endif %}
+
+    {% if error == "yes" %}
+    <script>
+        alert("Something went wrong. Please try again.");
+    </script>
+    {% endif %}
+{% endblock %}

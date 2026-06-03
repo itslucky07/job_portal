@@ -1,0 +1,11 @@
+*.pyc
+__pycache__/
+db.sqlite3
+media/
+.idea/
+.vscode/
+*.log
+*.pot
+*.pyo
+local_settings.py
+db.sqlite3-journal

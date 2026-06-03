@@ -5,4 +5,5 @@ from.models import *
 admin.site.register(StudentUser)
 admin.site.register(AdminUser)
 admin.site.register(RecruiterUser)
-
+admin.site.register(Job)
+admin.site.register(Apply)

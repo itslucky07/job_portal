@@ -1,283 +1,203 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-<header>
-    </header>
-    <section id="about">
-    <h2 style="color: white;">Lorem ipsum dolor sit amet, </h2>
-        <img class="animated-image" src=" " alt="img">
-        <div class="about-content animated-content">
-            <p>Lorem ipsum dolor sit amet, </p>
-            <p><strongLorem ipsum dolor sit amet,></strong></p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </div>
-        <img class="animated-image" src="https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/mcaps-mdcs-wallpaper-two-people-talking-2:VP2-859x540" alt="img">
-        <div class="education animated-content">
-            <h3>Education</h3>
-            <ul>
-                <li>DDS – UMKC School of Colles,London</li>
-                <li>MS, University of Missouri, KC</li>
-            </ul>
-        </div>
-        <img class="animated-image" src=" " alt="img">
-        <div class="contact-info animated-content">
-            <h3>Contact Information</h3>
-            <p>6416 N. Cosby Ave. Kansas City, MO 64151</p>
-            <p>Get Directions</p>
-            <p>(816) 587-6444</p>
-            <p></p>
-            <p></p>
-        </div>
-        <!-- Add images below -->
-        <div class="images animated-images">
-            <img src="https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/O2019-Hero-image-x2:VP1-539x440?resMode=sharp2&op_usm=1.5,0.65,15,0&wid=1920&hei=720&qlt=75&fit=constrain" alt="Image 1">
-            <img src="https://www.microsoft.com/en-us/microsoft-365/blog/wp-content/uploads/sites/2/2021/11/WIN22_HybridWork_010.jpg" alt="Image 2">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS40ncButEYMP_aOCKbsnjmhmIckWP6Umge842Hf3-XdptEmXD6pXIrE2gpT-9DAIdipp4&usqp=CAU" alt="Image 3">
-            <img src="https://blogs.microsoft.com/wp-content/uploads/prod/2021/09/9_7-2970643732-Hybrid-work-Lead.jpg" alt="Image 4">
-            <img src="https://media.product.which.co.uk/prod/images/original/a7aca8330298-istock-1140849012.jpg" alt="Image 5">
-        </div>
-    </section>
-</body>
-</html>
-<?php @include('footer.php'); ?>
+{% extends 'base.html' %}
+{% load static %}
 
+{% block title %}About Us | Job Portal{% endblock %}
+
+{% block extra_css %}
 <style>
-
-/* Reset some default styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Global styles */
-body {
-    font-family: Arial, sans-serif;
-    background: url('images/dentist.jpg') no-repeat;
-    background-size: cover;
-}
-
-/* Header styles */
-h2 {
-    color: #007acc;
-    font-size: 24px;
-    margin: 20px 0;
-    text-align: center;
-}
-
-/* Image styles */
-img {
-    max-width: 100%;
-    height: auto;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-top: 20px;
-}
-
-/* About section styles */
-.about-content {
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    margin-top: 20px;
-}
-
-.about-content p {
-    font-size: 16px;
-    line-height: 1.5;
-    margin-top: 20px;
-}
-
-.about-content strong {
-    color: #007acc;
-}
-
-/* Education section styles */
-.education {
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    margin-top: 20px;
-}
-
-.education h3 {
-    color: #007acc;
-    font-size: 24px;
-    margin-top: 20px;
-}
-
-.education ul {
-    list-style: none;
-    margin-left: 20px;
-}
-
-.education li {
-    font-size: 16px;
-    line-height: 1.5;
-    margin-top: 10px;
-}
-
-/* Contact info section styles */
-.contact-info {
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    margin-top: 20px;
-}
-
-.contact-info h3 {
-    color: #007acc;
-    font-size: 24px;
-    margin-top: 20px;
-}
-
-.contact-info p {
-    font-size: 16px;
-    line-height: 1.5;
-    margin-top: 10px;
-}
-
-/* Image section styles */
-.images {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin-top: 20px;
-    height: 50%;
-}
-
-.images img {
-    flex: 0 0 calc(20% - 20px);
-    max-width: calc(20% - 20px);
-    margin-bottom: 20px;
-}
-
-/* Footer styles */
-footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #007acc;
-    color: #fff;
-}
-/* Apply styles for the About Us section */
-#about {
-    text-align: center;
-    padding: 20px;
-}
-
-h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-
-/* Apply styles for animated images */
-.animated-image {
-    max-width: 100%;
-    height: auto;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-top: 20px;
-    animation: scaleUp 0.5s ease-in-out forwards;
-}
-
-/* Apply styles for animated content */
-.animated-content {
-    animation: fadeIn 1s ease-in-out forwards;
-    opacity: 0;
-    transform: translateY(20px);
-    margin-top: 20px;
-    text-align: left;
-}
-
-/* Apply styles for animated images container */
-.animated-images {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin-top: 20px;
-    animation: fadeIn 1s ease-in-out forwards;
-    opacity: 0;
-}
-
-/* Define animations */
-@keyframes scaleUp {
-    0% {
-        transform: scale(0.8);
-        opacity: 0;
+    .team-card {
+        background: #ffffff;
+        border-radius: var(--border-radius);
+        border: 1px solid #e2e8f0;
+        box-shadow: var(--shadow-md);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-align: center;
+        padding: 2rem 1.5rem;
+        margin-bottom: 2rem;
     }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
 
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
+    .team-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-premium);
+        border-color: rgba(99, 102, 241, 0.2);
     }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-/* Apply styles for the About Us section */
-#about {
-    text-align: center;
-    padding: 20px;
-}
 
-h2 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-}
-
-/* Apply styles for animated images */
-.image-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.animated-image {
-    max-width: 50%;
-    height: auto;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 10px;
-    animation: fadeIn 1s ease-in-out forwards, scaleUp 0.5s ease-in-out forwards;
-    opacity: 0;
-    transform: translateY(20px);
-}
-
-/* Define animations */
-@keyframes scaleUp {
-    0% {
-        transform: scale(0.8);
+    .team-img-wrapper {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin: 0 auto 1.5rem auto;
+        border: 4px solid #f1f5f9;
+        box-shadow: var(--shadow-sm);
+        transition: all 0.3s ease;
     }
-    100% {
-        transform: scale(1);
-    }
-}
 
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
+    .team-card:hover .team-img-wrapper {
+        border-color: var(--primary);
+        transform: scale(1.05);
     }
-    100% {
-        opacity: 1;
+
+    .team-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
-}
-/* Apply styles for clicked images */
-.clicked {
-    animation: none; /* Disable the scaleUp animation */
-    transform: scale(0.9); /* Optionally, shrink the image on click */
-}
+
+    .team-card h3 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--secondary);
+        margin-bottom: 0.25rem;
+    }
+
+    .team-card .role {
+        font-weight: 600;
+        color: var(--primary);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.75rem;
+    }
+
+    .team-card p {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 0;
+    }
+
+    /* Gallery Grid */
+    .gallery-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .gallery-item {
+        position: relative;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+        height: 160px;
+        transition: all 0.3s ease;
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    .gallery-item:hover {
+        transform: scale(1.03);
+        box-shadow: var(--shadow-lg);
+    }
+
+    .gallery-item:hover img {
+        transform: scale(1.08);
+    }
 </style>
+{% endblock %}
+
+{% block body %}
+    <!-- Navigation -->
+    {% include 'navigation.html' %}
+
+    <!-- Header Title -->
+    <div class="page-header-container animate-fade-in">
+        <div class="container">
+            <h1 class="page-header-title">About Us</h1>
+            <p class="page-header-subtitle">Empowering careers and connecting industries through talent.</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container animate-fade-in" style="animation-delay: 0.1s;">
+        <!-- Intro Section -->
+        <div class="card-custom p-4 p-md-5 mb-5 text-center">
+            <h2 class="font-weight-bold mb-3" style="letter-spacing: -0.02em;">Welcome to Our Job Portal</h2>
+            <p class="text-muted leading-relaxed mx-auto" style="max-width: 800px; font-size: 1.05rem;">
+                At our job portal, we are dedicated to helping job seekers find their dream careers and assisting employers in finding the perfect candidates to join their teams. We believe that job hunting shouldn't be stressful, and recruiting shouldn't be complex. Our goal is to streamline the connection process so you can focus on building outstanding futures together.
+            </p>
+        </div>
+
+        <!-- Team Section -->
+        <h2 class="text-center font-weight-bold mb-4" style="letter-spacing: -0.02em;">Meet the Visionaries</h2>
+        <p class="text-center text-muted mb-5">The dedicated minds working tirelessly behind the scenes.</p>
+        
+        <div class="row">
+            <!-- Team Member 1 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="team-card">
+                    <div class="team-img-wrapper">
+                        <img src="{% static 'images/team/1.jpg' %}" alt="Lucky Sharma">
+                    </div>
+                    <h3>Lucky Sharma</h3>
+                    <div class="role">CEO & Founder</div>
+                    <p>Bringing leadership and vision, Lucky ensures the platform aligns with market trends and student needs.</p>
+                </div>
+            </div>
+            <!-- Team Member 2 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="team-card">
+                    <div class="team-img-wrapper">
+                        <img src="{% static 'images/team/2.jpg' %}" alt="Asmit Shinde">
+                    </div>
+                    <h3>Asmit Shinde</h3>
+                    <div class="role">HR Manager</div>
+                    <p>With a keen eye for potential, Asmit facilitates recruitment and ensures internal organizational health.</p>
+                </div>
+            </div>
+            <!-- Team Member 3 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="team-card">
+                    <div class="team-img-wrapper">
+                        <img src="{% static 'images/team/4.jpg' %}" alt="Vishesh Yadav">
+                    </div>
+                    <h3>Vishesh Yadav</h3>
+                    <div class="role">Lead Developer</div>
+                    <p>Sahil engineers clean code, maintaining site robustness, search scalability, and overall performance.</p>
+                </div>
+            </div>
+            <!-- Team Member 4 -->
+            <div class="col-lg-3 col-md-6">
+                <div class="team-card">
+                    <div class="team-img-wrapper">
+                        <img src="{% static 'images/team/3.jpg' %}" alt="Sahil Talande">
+                    </div>
+                    <h3>Sahil Talande</h3>
+                    <div class="role">Marketing Specialist</div>
+                    <p>Vishesh designs modern marketing pipelines, reaching job seekers and recruiters globally.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Office Section -->
+        <div class="card-custom p-4 p-md-5 mt-5">
+            <h2 class="text-center font-weight-bold mb-3" style="letter-spacing: -0.02em;">Our Workspace</h2>
+            <p class="text-center text-muted mb-4">A look inside our modern, collaborative development environments.</p>
+            
+            <div class="gallery-container" id="office-gallery">
+                <div class="gallery-item"><img src="{% static 'images/team/55.jpeg' %}" alt="Office 1"></div>
+                <div class="gallery-item"><img src="{% static 'images/team/11.jpeg' %}" alt="Office 2"></div>
+                <div class="gallery-item"><img src="{% static 'images/team/22.jpeg' %}" alt="Office 3"></div>
+                <div class="gallery-item"><img src="{% static 'images/team/33.jpeg' %}" alt="Office 4"></div>
+                <div class="gallery-item"><img src="{% static 'images/team/44.jpeg' %}" alt="Office 5"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script to Shuffle Office Gallery -->
+    <script>
+        function shuffleGallery() {
+            var gallery = document.getElementById('office-gallery');
+            for (var i = gallery.children.length; i >= 0; i--) {
+                gallery.appendChild(gallery.children[Math.random() * i | 0]);
+            }
+        }
+        window.onload = shuffleGallery;
+    </script>
+{% endblock %}

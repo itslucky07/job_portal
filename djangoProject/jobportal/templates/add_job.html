@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Add Job | Job Portal{% endblock %}
+
+{% block body %}
+    <!-- Navigation -->
+    {% include 'recruiter_navigation.html' %}
+
+    <!-- Header Title -->
+    <div class="page-header-container animate-fade-in">
+        <div class="container">
+            <h1 class="page-header-title">Post a New Job</h1>
+            <p class="page-header-subtitle">Create a job listing to find candidates matching your requirements.</p>
+        </div>
+    </div>
+
+    <!-- Job Creation Form -->
+    <div class="container animate-fade-in" style="animation-delay: 0.1s; margin-bottom: 3rem;">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card-custom p-4 p-md-5">
+                    <h3 class="font-weight-bold mb-4" style="color: var(--secondary); letter-spacing: -0.02em;">Job Vacancy Details</h3>
+                    
+                    <form name="signup" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <div class="form-group">
+                            <label for="jobtitle">Job Title</label>
+                            <input type="text" class="form-control" id="jobtitle" name="jobtitle" placeholder="e.g. Senior Python Developer" required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label for="startdate">Start Date</label>
+                                <input type="date" class="form-control" id="startdate" name="startdate" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="enddate">End Date / Deadline</label>
+                                <input type="date" class="form-control" id="enddate" name="enddate" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label for="salary">Salary (Per Month in USD / INR)</label>
+                                <input type="text" class="form-control" id="salary" name="salary" placeholder="e.g. 5000" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="logo">Company Logo / Icon</label>
+                                <input type="file" class="form-control-file" id="logo" name="logo" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label for="experience">Required Experience</label>
+                                <input type="text" class="form-control" id="experience" name="experience" placeholder="e.g. 2 - 5 Years" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="location">Job Location</label>
+                                <input type="text" class="form-control" id="location" name="location" placeholder="e.g. New York, NY (Or Remote)" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="skills">Key Skills Required</label>
+                            <textarea class="form-control" id="skills" name="skills" rows="2" placeholder="e.g. Python, Django, REST APIs, SQL" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Job Description</label>
+                            <textarea class="form-control" id="description" name="description" rows="5" placeholder="Outline job responsibilities, perks, qualifications..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-premium btn-block mt-4"><i class="fas fa-plus-circle mr-2"></i> Publish Job Listing</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if error == "no" %}
+    <script>
+        alert("Job vacancy added successfully");
+        window.location = '{% url 'job_list' %}';
+    </script>
+    {% endif %}
+
+    {% if error == "yes" %}
+    <script>
+        alert("Something went wrong. Please try again.");
+    </script>
+    {% endif %}
+{% endblock %}

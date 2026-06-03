@@ -1,38 +1,64 @@
+{% extends 'base.html' %}
 {% load static %}
 
+{% block title %}Change Status | Job Portal{% endblock %}
+
 {% block body %}
+    <!-- Navigation -->
+    {% include 'admin_navigation.html' %}
 
-{% include 'admin_navigation.html' %}
+    <!-- Header Title -->
+    <div class="page-header-container animate-fade-in">
+        <div class="container">
+            <h1 class="page-header-title">Recruiter Status</h1>
+            <p class="page-header-subtitle">Accept or reject recruiter accounts to control portal access.</p>
+        </div>
+    </div>
 
-<marquee style="font-family: Monospaced; font-size: 25px; color: aliceblue; background-color: black; font-weight: bold; margin-top: 1%">
-    View Recruite - Pending
-</marquee>
-<hr>
- 
-<form class="container mt-5" method="post">
-    {% csrf_token %}
-    <label><b>Recruiter Name</b></label>
-    <input type="text" class="form-control" name="username" value="{{recruiter.user.first_name}} {{recruiter.user.first_name}}">
+    <!-- Form Area -->
+    <div class="container animate-fade-in" style="animation-delay: 0.1s; margin-bottom: 3rem;">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card-custom p-4 p-md-5">
+                    <h3 class="font-weight-bold mb-4" style="color: var(--secondary); letter-spacing: -0.02em;">Change Recruiter Status</h3>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label>Recruiter Name</label>
+                            <input type="text" class="form-control" name="username" value="{{ recruiter.user.first_name }} {{ recruiter.user.last_name }}" readonly style="background-color: #f1f5f9; cursor: not-allowed;">
+                        </div>
 
-    <label><b>Status</b></label>
-    <select  class="form-control" name="status">
-        <option value="Accept">Accept</option>
-        <option value="Reject"> Reject</option>
-    </select>
+                        <div class="form-group">
+                            <label>Company Name</label>
+                            <input type="text" class="form-control" value="{{ recruiter.company }}" readonly style="background-color: #f1f5f9; cursor: not-allowed;">
+                        </div>
 
-    <input type="Submit" class="btn btn-primary" style="margin-top: 2%; color: aliceblue; height: 50px; font-size: 20px">
-</form>
+                        <div class="form-group">
+                            <label for="status">Status Decision</label>
+                            <select class="form-control" id="status" name="status">
+                                <option value="Accept" {% if recruiter.status == "Accept" %}selected{% endif %}>Accept / Approve</option>
+                                <option value="Reject" {% if recruiter.status == "Reject" %}selected{% endif %}>Reject / Disable</option>
+                            </select>
+                        </div>
 
-{% if error == "no" %}
-<script>
-    alert("Status Changed successfully");
-    window.location = ('{% url 'recruiter_all' %}')
-</script>
-{% endif %}
+                        <button type="submit" class="btn-premium btn-block mt-4"><i class="fas fa-save mr-2"></i> Update Status</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-{% if error == "yes" %}
-<script>
-    alert("Something  Went Wrong, Try Again..")
-</script>
-{% endif %}
+    {% if error == "no" %}
+    <script>
+        alert("Status updated successfully");
+        window.location = '{% url 'recruiter_all' %}';
+    </script>
+    {% endif %}
+
+    {% if error == "yes" %}
+    <script>
+        alert("Something went wrong. Please try again.");
+    </script>
+    {% endif %}
 {% endblock %}

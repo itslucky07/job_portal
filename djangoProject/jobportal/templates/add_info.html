@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Build Resume | Job Portal{% endblock %}
+
+{% block body %}
+    <!-- Navigation -->
+    {% include 'user_navigation.html' %}
+
+    <!-- Header Title -->
+    <div class="page-header-container animate-fade-in">
+        <div class="container">
+            <h1 class="page-header-title">Build Resume</h1>
+            <p class="page-header-subtitle">Update your professional details to attract top recruiters.</p>
+        </div>
+    </div>
+
+    <!-- Resume Editor Form -->
+    <div class="container animate-fade-in" style="animation-delay: 0.1s; margin-bottom: 3rem;">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card-custom p-4 p-md-5">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="font-weight-bold mb-0" style="color: var(--secondary); letter-spacing: -0.02em;">Resume Credentials</h3>
+                        <a href="{% url 'resume' %}" class="btn-premium px-3 py-2" style="font-size: 0.85rem;"><i class="fas fa-file-pdf mr-1"></i> Preview Resume</a>
+                    </div>
+                    
+                    <form name="signup" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label for="fname">First Name</label>
+                                <input type="text" class="form-control" id="fname" name="fname" value="{{ student.user.first_name }}" readonly style="background-color: #f1f5f9; cursor: not-allowed;">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="lname">Last Name</label>
+                                <input type="text" class="form-control" id="lname" name="lname" value="{{ student.user.last_name }}" readonly style="background-color: #f1f5f9; cursor: not-allowed;">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="location">Current Location / Address</label>
+                            <input type="text" class="form-control" id="location" name="location" value="{{ resume.location|default:'' }}" placeholder="e.g. San Francisco, CA" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="skills">Skills (Comma-separated)</label>
+                            <input type="text" class="form-control" id="skills" name="skills" value="{{ resume.skills|default:'' }}" placeholder="e.g. Python, SQL, Project Management" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="project">Major Project / Target Role</label>
+                            <input type="text" class="form-control" id="project" name="project" value="{{ resume.project|default:'' }}" placeholder="e.g. Full-Stack E-Commerce App / Software Developer" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="experience">Work Experience Summary</label>
+                            <textarea class="form-control" id="experience" name="experience" rows="3" placeholder="Outline your previous job roles, duration, and key responsibilities..." required>{{ resume.experience|default:'' }}</textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Professional Summary</label>
+                            <textarea class="form-control" id="description" name="description" rows="4" placeholder="Briefly describe your professional background and career objectives..." required>{{ resume.description|default:'' }}</textarea>
+                        </div>
+
+                        <button type="submit" class="btn-premium btn-block mt-4"><i class="fas fa-save mr-2"></i> Save Resume Information</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if error == "no" %}
+    <script>
+        alert("Resume details have been saved successfully");
+        window.location = '{% url 'user_home' %}';
+    </script>
+    {% endif %}
+
+    {% if error == "yes" %}
+    <script>
+        alert("Something went wrong. Please try again.");
+    </script>
+    {% endif %}
+{% endblock %}

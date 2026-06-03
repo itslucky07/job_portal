@@ -1,38 +1,123 @@
+{% extends 'base.html' %}
 {% load static %}
 
-{% block body %}
+{% block title %}Admin Login | Job Portal{% endblock %}
 
-{% include 'navigation.html' %}
+{% block extra_css %}
+<style>
+    .login-wrapper {
+        min-height: calc(100vh - 70px - 250px);
+        display: flex;
+        align-items: center;
+        padding: 3rem 0;
+    }
 
-<marquee style="font-family:Monospaced; font-size: 25px; color: aliceblue; background-color: black; font-weight: bold; margin-top: 1%">
-    Admin Login
-</marquee>
-<hr>
-<form class="container mt-5" method="post">
-    {% csrf_token %}
-    <label><b>Username</b></label>
-    <input type="text" class="form-control" name="username" placeholder="Enter Username">
+    .form-pane {
+        padding: 3rem 2.5rem;
+    }
 
-    <label><b>Password</b></label>
-    <input type="password" class="form-control" name="password" placeholder="Enter Password">
+    .illustration-pane {
+        background: linear-gradient(135deg, #7f1d1d, #450a0a);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #ffffff;
+        padding: 3rem;
+        position: relative;
+        text-align: center;
+    }
 
-    <input type="Submit" class="btn btn-primary" style="margin-top: 2%; color: aliceblue; height: 50px; font-size: 20px">
-</form>
+    .illustration-pane::before {
+        content: '';
+        position: absolute;
+        width: 150%;
+        height: 150%;
+        background: radial-gradient(circle, rgba(239, 68, 68, 0.15) 0%, transparent 60%);
+        pointer-events: none;
+    }
 
-{% if error == "no" %}
-<script>
-    alert("Login successful");
-    window.location = ('{% url 'admin_home' %}')
-</script>
-{% endif %}
+    .illustration-pane h2 {
+        font-weight: 700;
+        font-size: 2.25rem;
+        margin-bottom: 1rem;
+        letter-spacing: -0.025em;
+    }
 
-{% if error == "yes" %}
-<script>
-    alert("Invalid Login credentials, Try Again..")
-</script>
-{% endif %}
+    .illustration-pane p {
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 1.05rem;
+        max-width: 340px;
+        line-height: 1.6;
+    }
 
+    .illustration-icon {
+        font-size: 5.5rem;
+        color: #ef4444;
+        margin-bottom: 2rem;
+        filter: drop-shadow(0 10px 15px rgba(239, 68, 68, 0.3));
+        animation: pulseIcon 2s ease-in-out infinite;
+    }
 
+    @keyframes pulseIcon {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+</style>
 {% endblock %}
 
+{% block body %}
+    <!-- Navigation -->
+    {% include 'navigation.html' %}
 
+    <!-- Login Area -->
+    <div class="container login-wrapper animate-fade-in">
+        <div class="login-container-card w-100">
+            <div class="row no-gutters">
+                <!-- Left Side - Form -->
+                <div class="col-lg-6 form-pane">
+                    <h2 class="font-weight-bold mb-2" style="letter-spacing: -0.03em; color: var(--secondary);">Admin Login</h2>
+                    <p class="text-muted mb-4">Log in to oversee and manage the recruitment platform.</p>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="username"><i class="fas fa-user-shield mr-1 text-muted"></i> Username</label>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Admin Username" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password"><i class="fas fa-lock mr-1 text-muted"></i> Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password" required>
+                        </div>
+                        
+                        <button type="submit" class="btn-premium btn-block mt-4" style="background: var(--danger-grad);"><i class="fas fa-sign-in-alt mr-2"></i> Log In</button>
+                    </form>
+
+                    {% if error == "yes" %}
+                    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert" style="border-radius: 8px;">
+                        <i class="fas fa-exclamation-circle mr-2"></i> Invalid admin credentials. Please try again.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <!-- Right Side - Illustration/Text -->
+                <div class="col-lg-6 illustration-pane d-none d-lg-flex">
+                    <i class="fas fa-users-cog illustration-icon"></i>
+                    <h2>Platform Administration</h2>
+                    <p>Verify recruiter status, manage users, delete old job postings, and review platform activities.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if error == "no" %}
+    <script>
+        alert("Login successful");
+        window.location = '{% url 'admin_home' %}';
+    </script>
+    {% endif %}
+{% endblock %}

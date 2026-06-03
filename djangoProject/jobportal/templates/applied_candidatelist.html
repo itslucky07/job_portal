@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Applied Candidates | Job Portal{% endblock %}
+
+{% block body %}
+    <!-- Navigation -->
+    {% include 'recruiter_navigation.html' %}
+
+    <!-- Header Title -->
+    <div class="page-header-container animate-fade-in">
+        <div class="container">
+            <h1 class="page-header-title">Candidate Applications</h1>
+            <p class="page-header-subtitle">Review incoming applications and download student resumes.</p>
+        </div>
+    </div>
+
+    <!-- Main Table Area -->
+    <div class="container animate-fade-in" style="animation-delay: 0.1s; margin-bottom: 3rem;">
+        <div class="table-premium-container">
+            <table class="table table-hover table-premium" id="example">
+                <thead>
+                    <tr>
+                        <th class="text-center">Sr. No</th>
+                        <th class="text-center">Candidate Name</th>
+                        <th class="text-center">Email ID</th>
+                        <th class="text-center">Contact No</th>
+                        <th class="text-center">Job Title</th>
+                        <th class="text-center">Apply Date</th>
+                        <th class="text-center">Resume</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in data %}
+                    <tr>
+                        <td class="text-center font-weight-bold" style="color: var(--text-muted);">{{ forloop.counter }}</td>
+                        <td class="text-center font-weight-bold text-dark">{{ student.student.user.first_name }} {{ student.student.user.last_name }}</td>
+                        <td class="text-center" style="color: var(--primary);">{{ student.student.user.username }}</td>
+                        <td class="text-center">{{ student.student.mobile }}</td>
+                        <td class="text-center font-weight-bold">{{ student.job.title }}</td>
+                        <td class="text-center">{{ student.applydate|date:"M d, Y" }}</td>
+                        <td class="text-center">
+                            {% if student.resume %}
+                                <a href="{{ student.resume.url }}" class="btn-premium btn-premium-success py-1 px-3" style="font-size: 0.85rem;" target="_blank">
+                                    <i class="fas fa-file-download mr-1"></i> Download
+                                </a>
+                            {% else %}
+                                <span class="badge badge-light text-muted p-2"><i class="fas fa-times-circle mr-1"></i> No Resume</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" class="text-center text-muted py-4">No candidates have applied to your job postings yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

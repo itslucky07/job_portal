@@ -1,106 +1,110 @@
+{% extends 'base.html' %}
 {% load static %}
 
+{% block title %}User Sign Up | Job Portal{% endblock %}
+
 {% block body %}
+    <!-- Navigation -->
+    {% include 'navigation.html' %}
 
-{% include 'navigation.html' %}
+    <!-- Header Title -->
+    <div class="page-header-container animate-fade-in">
+        <div class="container">
+            <h1 class="page-header-title">Candidate Registration</h1>
+            <p class="page-header-subtitle">Join us to discover your dream job opportunity.</p>
+        </div>
+    </div>
 
-<script>
-    function checkpass(){
-        if(document.signup.password.value!=document.signup.cpassword.value){
-            alert("password and  confirm password doesn't match");
-            document.signup.cpassword.cpwd.focus();
-            return false;
+    <!-- Sign Up Form -->
+    <div class="container animate-fade-in" style="animation-delay: 0.1s; margin-bottom: 3rem;">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card-custom p-4 p-md-5">
+                    <h3 class="font-weight-bold mb-4" style="color: var(--secondary); letter-spacing: -0.02em;">Create Candidate Account</h3>
+                    
+                    <form onsubmit="return checkpass();" name="signup" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label for="fname">First Name</label>
+                                <input type="text" class="form-control" name="fname" id="fname" placeholder="John" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="lname">Last Name</label>
+                                <input type="text" class="form-control" name="lname" id="lname" placeholder="Doe" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label for="contact">Contact Number</label>
+                                <input type="text" class="form-control" name="contact" pattern="[0-9]{10,10}" title="Please enter a 10 digit phone number (0-9)" id="contact" placeholder="10-digit mobile number" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="email">Email Address</label>
+                                <input type="email" class="form-control" name="email" id="email" placeholder="john.doe@example.com" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" id="password" placeholder="Create Password" title="Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number" required>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="cpassword">Confirm Password</label>
+                                <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Confirm Password" required>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label class="d-block">Gender</label>
+                                <div class="form-check form-check-inline mt-1">
+                                    <input class="form-check-input" type="radio" name="gender" id="male" value="Male" required>
+                                    <label class="form-check-label font-weight-normal" for="male">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline mt-1">
+                                    <input class="form-check-input" type="radio" name="gender" id="female" value="Female" required>
+                                    <label class="form-check-label font-weight-normal" for="female">Female</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label for="image">Profile Image</label>
+                                <input type="file" class="form-control-file" name="image" id="image">
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-premium btn-block mt-4"><i class="fas fa-user-plus mr-2"></i> Register Account</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script validation -->
+    <script>
+        function checkpass() {
+            if (document.signup.password.value != document.signup.cpassword.value) {
+                alert("Password and confirm password don't match");
+                document.signup.cpassword.focus();
+                return false;
+            }
+            return true;
         }
-        return true;
-    }
-
-</script>
-
-    <marquee style="font-family:Monospaced; font-size: 25px; color: aliceblue; background-color: black; font-weight: bold; margin-top: 1%">
-        User Sign Up
-    </marquee>
-<hr>
-    <form class="container mt-5 " onsubmit="return checkpass();" name="signup" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label>First Name</label>
-                <input type="text" class="form-control" name="fname" placeholder="Enter First Name" required>
-            </div>
-             <div class="form-group col-md-6">
-                <label>Last Name</label>
-                <input type="text" class="form-control" name="lname" placeholder="Enter Last Name" required>
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label>Contact</label>
-                <input type="text" class="form-control" name="contact" placeholder="Enter Contact No" required>
-            </div>
-
-        </div>
-
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label>Email Id</label>
-                <input type="text" class="form-control" name="email" placeholder="Enter Email Address" required>
-            </div>
-
-        </div>
-
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label>Password</label>
-                <input type="password" class="form-control" name="password" placeholder="Enter Password" required>
-            </div>
-             <div class="form-group col-md-6">
-                <label>Confirm Password</label>
-                <input type="password" class="form-control" name="cpassword" placeholder="Confirm password" required>
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label>Gender</label>
-                <div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="customRadioInline1" name="gender" class="custom-control-input" value="Male">
-                        <label class="custom-control-label" for="customRadioInline1">Male</label>
-                    </div>
-                    <div class="custom-control custom-radio custom-control-inline">
-                        <input type="radio" id="customRadioInline2" name="gender" class="custom-control-input" value="Female">
-                        <label class="custom-control-label" for="customRadioInline2">Female</label>
-                    </div>
-                </div>
-            </div>
-
-             <div class="form-group col-md-6">
-                 <div class="form-group col-md-6">
-                    <label>Image</label>
-                    <input type="file" class="form-control" name="image" >
-                </div>
-            </div>
-        </div>
-
-        <input type="Submit"  value="Submit" class="btn btn-primary my-3" style="margin-top: 2%; color: aliceblue ; height:70px ;font-size: 20px">
-
-    </form>
-
-{% include 'footer.html' %}
+    </script>
 
     {% if error == "no" %}
     <script>
-        alert("signup successfull");
-        window.location='{% url 'user_login' %}'
+        alert("Signup successful");
+        window.location = '{% url 'user_login' %}';
     </script>
     {% endif %}
 
     {% if error == "yes" %}
     <script>
-        alert("Something went wrong,Try again");
+        alert("Something went wrong. Please try again.");
     </script>
     {% endif %}
-
-
 {% endblock %}

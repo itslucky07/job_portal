@@ -1,0 +1,177 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: 	#6381a1;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: url("{% static 'images/hero-background.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            padding: 100px 0;
+            text-align: center;
+            color: #fffff;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero form {
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .hero input[type="text"],
+        .hero button[type="submit"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-right: 10px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .hero input[type="text"] {
+            width: 400px;
+            margin-right: 0;
+        }
+
+        .hero button[type="submit"] {
+            background-color: #034671;
+            color:   #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .hero button[type="submit"]:hover {
+            background-color: #034671;
+        }
+
+        /* Job Card Styles */
+        .card {
+            border-radius: 25px; /* Make corners completely round */
+            border: 1px solid #ccc;
+            transition: box-shadow 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #055698;
+            color: white;
+            border-radius: 25px 25px 0 0; /* Round top corners */
+            padding: px 0;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center; /* Center the title */
+            margin-bottom: 5px; /* Add some space between title and content */
+        }
+
+        .card-body {
+            padding: 15px;
+            text-align: left; /* Align other content to the left */
+        }
+
+        .card-text {
+            margin-bottom: 5px;
+            color: #6c757d;
+            font-size: 16px;
+        }
+
+        .card-footer {
+            border-top: none;
+            border-radius: 0 0 25px 25px; /* Round bottom corners */
+            background-color: #f9f9f9;
+            padding: 5px 0;
+            display: flex;
+            justify-content: center; /* Center the button horizontally */
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: #fff;
+            transition: background-color 0.3s;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div>
+            <h1>Find Your Dream Job Today!</h1>
+            <form id="jobSearchForm">
+                <input type="text" id="keywordSearch" placeholder="Enter keywords...">
+                <button type="submit">Search Jobs</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Job Cards -->
+    <div class="container">
+        <div class="row">
+            {% for job in jobs %}
+            <div class="col-md-4">
+                <div class="card shadow">
+                    <div class="card-header">
+                        <h5 class="card-title">{{ job.title }}</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"><strong>Company:</strong> {{ job.recruiter_user.company }}</p>
+                        <p class="card-text"><strong>Location:</strong> {{ job.location }}</p>
+                        <p class="card-text"><strong>Start Date:</strong> {{ job.start_date }}</p>
+                        <p class="card-text"><strong>End Date:</strong> {{ job.end_date }}</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="{% url 'user_login'  %}" class="btn btn-success btn-sm">Apply</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Job search form submit event
+            $('#jobSearchForm').submit(function(event) {
+                event.preventDefault(); // Prevent form submission
+
+                // Retrieve keyword input value
+                var keyword = $('#keywordSearch').val();
+
+                // Perform search action here, such as filtering or redirection
+            });
+        });
+    </script>
+</body>
+</html>

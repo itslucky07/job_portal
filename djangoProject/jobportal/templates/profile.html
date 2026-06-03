@@ -1,119 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Profile</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 0;
-    }
+    {% load static %}
+    <title>Job Portal</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .nav-link {
+            color: white;
+            margin-right: 4px;
+        }
+        .nav-link:hover {
+            color: yellow;
+            font-weight: bold;
+            background-color: blueviolet;
+            border-radius: 10px;
+        }
+        .navbar-brand:hover {
+            color: yellow;
+            font-weight: bold;
+            background-color: blueviolet;
+            border-radius: 10px;
+        }
+        /* Custom style for the user's name */
+        .user-name {
+            font-family: 'Cursive';
+            font-size: 20px;
+            color: white;
+            margin-right: 10px;
+        }
+        /* Adjusted alignment of list items */
+        .navbar-nav {
+            margin: auto;
+        }
+        /* Center the dashboard content */
+        .dashboard-content {
+            text-align: center;
+            margin-top: 20px;
+        }
+        /* Style for profile image */
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            
+        }
+        element.style {
+            background-color: #343a40;
+        }        
 
-    #profile-container {
-      max-width: 600px;
-      margin: 50px auto;
-      background-color: #fff;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-    }
-
-    #profile-image {
-      max-width: 50%;
-      border-radius: 70%;
-      margin-bottom: 10px;
-    }
-
-    #change-password-form {
-      margin-top: 20px;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    input {
-      width: 100%;
-      padding: 8px;
-      box-sizing: border-box;
-      margin-bottom: 10px;
-    }
-
-    button {
-      background-color: #4caf50;
-      color: #fff;
-      padding: 10px 15px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #45a049;
-    }
-
-    #contact-info {
-      margin-top: 20px;
-    }
-  </style>
+    </style>
 </head>
 <body>
+ 
 
-<div id="profile-container">
-  <img id="profile-image" src="https://media.licdn.com/dms/image/C4D12AQFBwRUfyBn5yQ/article-cover_image-shrink_600_2000/0/1520110535291?e=2147483647&v=beta&t=9zFPqxuqLOcN0xHA_v5jHZVEW5WNLMxhVCj4eOOwJFI" alt="Profile Photo">
-  <h2>Username: lorem ipsum</h2>
+<nav class="navbar navbar-expand-sm" style="background-color: maroon">
+    <a class="navbar-brand text-white pl-5 font-weight-bold" style="font-family: 'Monospaced'; font-size: 20px">Job Portal</a>
+    <!-- Adjusted alignment of list items -->
+    <ul class="navbar-nav mx-auto"> <!-- mx-auto to center the items -->
+        <li class="nav-item">
+            <a class="nav-link" href="{%  url 'user_home' %}"><i class="fa fa-home mr-1"></i>Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'user_latestjob' %}" ><i class="fa fa-users mr-1"></i>Job List</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'change_passworduser' %}" ><i class="fa fa-user-circle mr-1"></i>Change Password</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}" ><i class="fa fa-sign-out mr-1"></i>Logout</a>
+        </li>
 
-  <div id="change-password-form">
-    <h3>Change Password</h3>
-    <form action="#" method="post">
-      <div class="form-group">
-        <label for="current-password">Current Password:</label>
-        <input type="password" id="current-password" name="current-password" value="1234"required>
-      </div>
-      <div class="form-group">
-        <label for="new-password">New Password:</label>
-        <input type="password" id="new-password" name="new-password" required>
-      </div>
-      <div class="form-group">
-        <label for="confirm-password">Confirm Password:</label>
-        <input type="password" id="confirm-password" name="confirm-password" required>
-      </div>
-      <button type="submit">Change Password</button>
-    </form>
-  </div>
-
-  <div id="contact-info">
-    <h3>Contact Information</h3>
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" value="mno@example.com" required>
-    </div>
-    <div class="form-group">
-      <label for="phone">Phone:</label>
-      <input type="tel" id="phone" name="phone" value="+1 234 567 890" required>
-    </div>
-  </div>
-
-  <button id="update-profile-button" onclick="updateProfile()">Update Profile</button>
-</div>
-
-<script>
-  function updateProfile() {
-    // Add logic to update the user's profile information
-    alert('Profile updated successfully!');
-  }
-</script>
+        <li class="nav-item dropdown ml-auto"> <!-- ml-auto to push the dropdown to the right -->
+            <a class="nav-link dropdown-toggle" href="profile.html" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-dashboard mr-1"></i>Profile
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <!-- Include the user dashboard here -->
+                <a class="dropdown-item" href="#">
+                    <div class="dashboard-content">
+                        <img src="{{ student.image.url }}" class="profile-image" alt="User Image">
+                        <h5>{{ student.user.first_name }} {{ student.user.last_name }}</h5>
+                        <p>{{ student.user.username }}</p>
+                        <p>Contact: {{ student.mobile }}</p>
+                        <p>Gender: {{ student.gender }}</p>
+                    </div>
+                </a>
+                <!-- Add more dashboard options here if needed -->
+            </div>
+        </li>
+    </ul>
+    <!-- Display user's name in the top-right corner -->
+    {% comment %} <span class="navbar-brand user-name">{{ request.user.first_name }} {{ request.user.last_name }}</span>
+ {% endcomment %}
+</nav>
 
 </body>
 </html>
-
-

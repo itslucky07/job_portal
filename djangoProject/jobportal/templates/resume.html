@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Resume | Job Portal{% endblock %}
+
+{% block extra_css %}
+<style>
+    .resume-card {
+        background: #ffffff;
+        border-radius: var(--border-radius);
+        border: 1px solid #e2e8f0;
+        box-shadow: var(--shadow-lg);
+        padding: 3.5rem;
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+        position: relative;
+    }
+
+    .resume-section-header {
+        border-bottom: 2px solid var(--primary);
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: var(--secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .resume-label {
+        font-weight: 700;
+        color: var(--secondary);
+        font-size: 0.95rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .resume-value {
+        color: var(--text-main);
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+        white-space: pre-wrap;
+    }
+
+    /* Print styling overrides */
+    @media print {
+        .navbar-custom, .footer-custom, #printButton, .page-header-container {
+            display: none !important;
+        }
+        body {
+            background: #ffffff !important;
+            color: #000000 !important;
+        }
+        .resume-card {
+            border: none !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+    <!-- Navigation -->
+    {% include 'user_navigation.html' %}
+
+    <!-- Header Title -->
+    <div class="page-header-container animate-fade-in">
+        <div class="container">
+            <h1 class="page-header-title">My Resume</h1>
+            <p class="page-header-subtitle">View and print your job application credentials.</p>
+        </div>
+    </div>
+
+    <!-- Resume Document Area -->
+    <div class="container animate-fade-in" style="animation-delay: 0.1s;">
+        <div class="resume-card">
+            <!-- Profile Info Header -->
+            <div class="row align-items-center mb-5 pb-4 border-bottom">
+                <div class="col-sm-8 text-center text-sm-left">
+                    <h1 class="font-weight-bold text-dark mb-1" style="font-size: 2.25rem; letter-spacing: -0.025em;">{{ user.first_name }} {{ user.last_name }}</h1>
+                    <div class="text-primary font-weight-bold mb-2">{{ resume.project|default:"Candidate" }}</div>
+                    <div style="font-size: 0.95rem; color: var(--text-muted);">
+                        <span class="mr-3"><i class="fas fa-envelope mr-1 text-muted"></i> {{ user.username }}</span>
+                        <span class="mr-3"><i class="fas fa-phone mr-1 text-muted"></i> {{ student_user.mobile }}</span>
+                        <span><i class="fas fa-map-marker-alt mr-1 text-muted"></i> {{ resume.location }}</span>
+                    </div>
+                </div>
+                <div class="col-sm-4 text-center text-sm-right mt-3 mt-sm-0">
+                    <button id="printButton" class="btn-premium px-4"><i class="fas fa-print mr-2"></i> Print Resume</button>
+                </div>
+            </div>
+
+            <!-- Resume Content Details -->
+            <div class="row">
+                <div class="col-12">
+                    <h3 class="resume-section-header">Professional Summary</h3>
+                    <div class="resume-value">{{ resume.description }}</div>
+
+                    <h3 class="resume-section-header">Skills</h3>
+                    <div class="resume-value">{{ resume.skills }}</div>
+
+                    <h3 class="resume-section-header">Professional Experience</h3>
+                    <div class="resume-value">{{ resume.experience }}</div>
+
+                    <h3 class="resume-section-header">Key Projects</h3>
+                    <div class="resume-value">{{ resume.project }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        document.getElementById('printButton').addEventListener('click', function() {
+            window.print();
+        });
+    </script>
+{% endblock %}

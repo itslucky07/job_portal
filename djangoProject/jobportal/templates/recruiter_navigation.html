@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'recruiter_home' %}">
+            <span><i class="fas fa-briefcase mr-2"></i></span>JobPortal <span class="badge badge-info ml-2" style="font-size: 0.65rem;">Recruiter</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'recruiter_home' %}"><i class="fas fa-home"></i> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'add_job' %}"><i class="fas fa-plus-circle"></i> Add Job</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'job_list' %}"><i class="fas fa-list-ul"></i> Job List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'applied_candidatelist' %}"><i class="fas fa-users-cog"></i> Candidates</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'change_passwordrecruiter' %}"><i class="fas fa-key"></i> Password</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-warning" href="{% url 'Logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </li>
+            </ul>
+            <span class="navbar-text font-weight-bold text-white ml-lg-2">
+                <i class="fas fa-building text-info mr-1"></i> {{ request.user.first_name }} {{ request.user.last_name }}
+            </span>
+        </div>
+    </div>
+</nav>
