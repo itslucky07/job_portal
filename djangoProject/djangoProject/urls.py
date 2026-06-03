@@ -74,6 +74,13 @@ urlpatterns = [
     path('user_dashboard',user_dashboard,name='user_dashboard'),
     path('resume',resume,name ='resume'),
     path('add_info',add_info,name='add_info'),
+    path('applied_jobs', applied_jobs, name='applied_jobs'),
+    path('update_application_status/<int:pid>/<str:status_val>/', update_application_status, name='update_application_status'),
+    path('bookmark_job/<int:pid>', bookmark_job, name='bookmark_job'),
+    path('saved_jobs', saved_jobs, name='saved_jobs'),
+    path('messages', chat_dashboard, name='chat_dashboard'),
+    path('messages/<int:recipient_id>', chat_room, name='chat_room'),
+    path('send_message/<int:recipient_id>', send_message, name='send_message'),
 
 
 

@@ -7,6 +7,7 @@ class StudentUser(models.Model):
     image = models.FileField(null=True)
     gender = models.CharField(max_length=15, null=True)
     type = models.CharField(max_length=15, null=True)
+    resume_pdf = models.FileField(null=True, blank=True)
 
     def __str__(self):
         return self.user.username
@@ -55,6 +56,7 @@ class Apply(models.Model):
     student =models.ForeignKey(StudentUser, on_delete=models.CASCADE)
     resume = models.FileField(null=True)
     applydate = models.DateField()
+    status = models.CharField(max_length=30, default="Pending")
 
      
     def __str__(self):
@@ -82,3 +84,21 @@ class Resume(models.Model):
     project = models.CharField(max_length=150) 
     def _str_(self):
         return self.project
+
+class SavedJob(models.Model):
+    student = models.ForeignKey(StudentUser, on_delete=models.CASCADE)
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    saved_date = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.student.user.username} saved {self.job.title}"
+
+class Message(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_messages')
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"From {self.sender.username} to {self.receiver.username} at {self.timestamp}"

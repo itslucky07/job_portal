@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Applied Jobs | Job Portal{% endblock %}
+
+{% block body %}
+    <!-- Navigation -->
+    {% include 'user_navigation.html' %}
+
+    <!-- Header Title -->
+    <div class="page-header-container animate-fade-in">
+        <div class="container">
+            <h1 class="page-header-title">My Applied Jobs</h1>
+            <p class="page-header-subtitle">Track the status of your submitted job applications in real time.</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container animate-fade-in" style="animation-delay: 0.1s; margin-bottom: 3rem;">
+        <div class="table-premium-container">
+            <table class="table table-hover table-premium" id="example">
+                <thead>
+                    <tr>
+                        <th class="text-center" style="width: 80px;">Sr. No</th>
+                        <th>Job Title</th>
+                        <th>Company Name</th>
+                        <th class="text-center">Salary Package</th>
+                        <th class="text-center">Location</th>
+                        <th class="text-center">Apply Date</th>
+                        <th class="text-center">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for app in applied %}
+                    <tr>
+                        <td class="text-center font-weight-bold" style="color: var(--text-muted);">{{ forloop.counter }}</td>
+                        <td class="font-weight-bold">
+                            <a href="{% url 'job_detail' app.job.id %}" class="text-dark" style="text-decoration: none;">{{ app.job.title }}</a>
+                        </td>
+                        <td>{{ app.job.recruiter_user.company }}</td>
+                        <td class="text-center">${{ app.job.salary|floatformat:0 }} / yr</td>
+                        <td class="text-center"><i class="fas fa-map-marker-alt text-muted mr-1"></i> {{ app.job.location }}</td>
+                        <td class="text-center">{{ app.applydate|date:"M d, Y" }}</td>
+                        <td class="text-center">
+                            {% if app.status == "Pending" %}
+                                <span class="badge badge-info badge-premium" style="background-color: rgba(14, 165, 233, 0.1); color: rgb(14, 165, 233); border: none;"><i class="fas fa-spinner fa-spin mr-1"></i> Pending</span>
+                            {% elif app.status == "Shortlisted" %}
+                                <span class="badge badge-success badge-premium" style="background-color: rgba(16, 185, 129, 0.1); color: rgb(16, 185, 129); border: none;"><i class="fas fa-check-circle mr-1"></i> Shortlisted</span>
+                            {% elif app.status == "Rejected" %}
+                                <span class="badge badge-danger badge-premium" style="background-color: rgba(239, 68, 68, 0.1); color: rgb(239, 68, 68); border: none;"><i class="fas fa-times-circle mr-1"></i> Rejected</span>
+                            {% else %}
+                                <span class="badge badge-secondary badge-premium"><i class="fas fa-info-circle mr-1"></i> {{ app.status }}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" class="text-center text-muted py-4">You have not applied to any jobs yet. <a href="{% url 'user_filter' %}" class="font-weight-bold">Search Jobs</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

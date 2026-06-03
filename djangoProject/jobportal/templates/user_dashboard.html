@@ -257,6 +257,21 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label for="resume_pdf">Upload PDF Resume</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="resume_pdf" name="resume_pdf" accept="application/pdf">
+                                    <label class="custom-file-label" for="resume_pdf" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Choose PDF...</label>
+                                </div>
+                                {% if student.resume_pdf %}
+                                    <div class="mt-2">
+                                        <a href="{{ student.resume_pdf.url }}" target="_blank" class="small font-weight-bold" style="color: var(--primary);"><i class="fas fa-file-pdf mr-1"></i> View Current PDF Resume</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
                         <button type="submit" class="btn-premium btn-block mt-4"><i class="fas fa-save mr-2"></i> Save Profile Settings</button>
                     </form>
                 </div>
@@ -268,6 +283,12 @@
         // Custom File Input filename update
         document.getElementById('image').addEventListener('change', function(e) {
             var fileName = e.target.files[0] ? e.target.files[0].name : "Choose file...";
+            var label = e.target.nextElementSibling;
+            label.innerText = fileName;
+        });
+
+        document.getElementById('resume_pdf').addEventListener('change', function(e) {
+            var fileName = e.target.files[0] ? e.target.files[0].name : "Choose PDF...";
             var label = e.target.nextElementSibling;
             label.innerText = fileName;
         });

@@ -26,10 +26,10 @@ def user_filter(request):
     li = []
     for i in data:
         li.append(i.job.id)
+    
+    saved_jobs_list = SavedJob.objects.filter(student=student).values_list('job_id', flat=True)
 
-    # job = Job.objects.filter(recruiter_user=recruiter)  # need to see is it recruiter or recruiteruser
-    # d = {'job': job}
-    d = {'job': job, 'li': li}
+    d = {'job': job, 'li': li, 'saved_jobs_list': saved_jobs_list}
     return render(request, 'user_filter.html',d)
 
  
@@ -592,8 +592,31 @@ def user_home(request):
     # Retrieve applied jobs for the current user
     data = Apply.objects.filter(student=student)
     li = [i.job.id for i in data]
+
+    # Retrieve saved jobs for the current user
+    saved_jobs_list = SavedJob.objects.filter(student=student).values_list('job_id', flat=True)
+
+    # Skill-based Job Recommendations
+    student_resume = Resume.objects.filter(student_user=student).first()
+    recommended_jobs = []
+    if student_resume and student_resume.skills:
+        skills_list = [s.strip().lower() for s in student_resume.skills.split(',')]
+        from django.db.models import Q
+        query = Q()
+        for skill in skills_list:
+            if skill.strip():
+                query |= Q(skills__icontains=skill.strip()) | Q(title__icontains=skill.strip())
+        if query:
+            recommended_jobs = Job.objects.filter(query).exclude(id__in=li).distinct()[:6]
     
-    context = {'latest_jobs': latest_jobs, 'student': student, 'error': error, 'li': li}
+    context = {
+        'latest_jobs': latest_jobs,
+        'student': student,
+        'error': error,
+        'li': li,
+        'saved_jobs_list': saved_jobs_list,
+        'recommended_jobs': recommended_jobs,
+    }
     return render(request, 'user_home.html', context)
 
 
@@ -631,6 +654,14 @@ def user_dashboard(request):
         except:
             pass
 
+        try:
+            pdf = request.FILES['resume_pdf']
+            student.resume_pdf = pdf
+            student.save()
+            error = "no"
+        except:
+            pass
+
     d = {'student': student, 'error': error}
     return render(request, 'user_dashboard.html', d)
 
@@ -651,7 +682,8 @@ def user_latestjob(request):
     student = StudentUser.objects.get(user=request.user)
     data = Apply.objects.filter(student=student)
     li = [i.job.id for i in data]
-    context = {'jobs': jobs, 'li': li}
+    saved_jobs_list = SavedJob.objects.filter(student=student).values_list('job_id', flat=True)
+    context = {'jobs': jobs, 'li': li, 'saved_jobs_list': saved_jobs_list}
     return render(request, 'user_latestjob.html', context)
 
 
@@ -798,6 +830,142 @@ def filter3(request):
     # Directly pass the job queryset without any applied job conditions
     context = {'job': job}
     return render(request, 'filter3.html', context)
+
+def applied_jobs(request):
+    if not request.user.is_authenticated:
+        return redirect('user_login')
+    user = request.user
+    try:
+        student = StudentUser.objects.get(user=user)
+    except StudentUser.DoesNotExist:
+        return redirect('user_login')
+    
+    applied = Apply.objects.filter(student=student).order_by('-applydate')
+    d = {'applied': applied}
+    return render(request, 'applied_jobs.html', d)
+
+def update_application_status(request, pid, status_val):
+    if not request.user.is_authenticated:
+        return redirect('recruiter_login')
+    
+    try:
+        recruiter = RecruiterUser.objects.get(user=request.user)
+    except RecruiterUser.DoesNotExist:
+        return redirect('recruiter_login')
+
+    application = get_object_or_404(Apply, id=pid)
+    if application.job.recruiter_user == recruiter:
+        application.status = status_val
+        application.save()
+        messages.success(request, f"Application status updated to {status_val} successfully.")
+    else:
+        messages.error(request, "You are not authorized to update this application.")
+    
+    return redirect('applied_candidatelist')
+
+def bookmark_job(request, pid):
+    if not request.user.is_authenticated:
+        return redirect('user_login')
+    
+    try:
+        student = StudentUser.objects.get(user=request.user)
+    except StudentUser.DoesNotExist:
+        return redirect('user_login')
+        
+    job = get_object_or_404(Job, id=pid)
+    
+    saved_query = SavedJob.objects.filter(student=student, job=job)
+    if saved_query.exists():
+        saved_query.delete()
+        messages.info(request, "Job removed from bookmarks.")
+    else:
+        SavedJob.objects.create(student=student, job=job)
+        messages.success(request, "Job saved to bookmarks successfully.")
+        
+    next_url = request.GET.get('next', 'user_filter')
+    return redirect(next_url)
+
+def saved_jobs(request):
+    if not request.user.is_authenticated:
+        return redirect('user_login')
+        
+    try:
+        student = StudentUser.objects.get(user=request.user)
+    except StudentUser.DoesNotExist:
+        return redirect('user_login')
+        
+    saved = SavedJob.objects.filter(student=student).order_by('-saved_date')
+    
+    applied_data = Apply.objects.filter(student=student)
+    applied_ids = [i.job.id for i in applied_data]
+    
+    d = {'saved': saved, 'applied_ids': applied_ids}
+    return render(request, 'saved_jobs.html', d)
+
+def chat_dashboard(request):
+    if not request.user.is_authenticated:
+        return redirect('index')
+        
+    user = request.user
+    
+    is_student = StudentUser.objects.filter(user=user).exists()
+    is_recruiter = RecruiterUser.objects.filter(user=user).exists()
+    
+    sent_to = Message.objects.filter(sender=user).values_list('receiver_id', flat=True)
+    received_from = Message.objects.filter(receiver=user).values_list('sender_id', flat=True)
+    
+    chat_partner_ids = set(list(sent_to) + list(received_from))
+    chat_partners = User.objects.filter(id__in=chat_partner_ids)
+    
+    d = {
+        'chat_partners': chat_partners,
+        'is_student': is_student,
+        'is_recruiter': is_recruiter,
+    }
+    return render(request, 'chat.html', d)
+
+def chat_room(request, recipient_id):
+    if not request.user.is_authenticated:
+        return redirect('index')
+        
+    user = request.user
+    recipient = get_object_or_404(User, id=recipient_id)
+    
+    is_student = StudentUser.objects.filter(user=user).exists()
+    is_recruiter = RecruiterUser.objects.filter(user=user).exists()
+    
+    Message.objects.filter(sender=recipient, receiver=user, is_read=False).update(is_read=True)
+    
+    messages_list = Message.objects.filter(
+        (models.Q(sender=user) & models.Q(receiver=recipient)) |
+        (models.Q(sender=recipient) & models.Q(receiver=user))
+    ).order_by('timestamp')
+    
+    sent_to = Message.objects.filter(sender=user).values_list('receiver_id', flat=True)
+    received_from = Message.objects.filter(receiver=user).values_list('sender_id', flat=True)
+    chat_partner_ids = set(list(sent_to) + list(received_from))
+    chat_partners = User.objects.filter(id__in=chat_partner_ids)
+    
+    d = {
+        'recipient': recipient,
+        'chat_partners': chat_partners,
+        'chat_messages': messages_list,
+        'is_student': is_student,
+        'is_recruiter': is_recruiter,
+    }
+    return render(request, 'chat.html', d)
+
+def send_message(request, recipient_id):
+    if not request.user.is_authenticated:
+        return redirect('index')
+        
+    if request.method == 'POST':
+        content = request.POST.get('content')
+        recipient = get_object_or_404(User, id=recipient_id)
+        if content:
+            Message.objects.create(sender=request.user, receiver=recipient, content=content)
+            
+    return redirect('chat_room', recipient_id=recipient_id)
 
 
 
