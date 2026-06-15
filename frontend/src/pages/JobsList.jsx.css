@@ -1,0 +1,380 @@
+/* JobsList.css - Indeed / Naukri Split Layout Styling */
+
+.jobs-explorer {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 72px); /* Fill screen minus navbar height */
+  overflow: hidden;
+}
+
+/* Search Header */
+.search-bar-section {
+  background-color: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 40px;
+}
+
+.search-form {
+  display: flex;
+  gap: 15px;
+  max-width: 1100px;
+}
+
+.search-input-group {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  background-color: var(--bg);
+}
+
+.search-input-group input {
+  border: none;
+  background: transparent;
+  width: 100%;
+  outline: none;
+  font-size: 14px;
+  color: var(--text-h);
+}
+
+.search-btn {
+  background-color: var(--primary-indigo);
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  padding: 10px 24px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.search-btn:hover {
+  background-color: var(--primary-hover);
+}
+
+/* Split Pane Layout */
+.split-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Left Pane: Job List */
+.left-pane {
+  width: 400px;
+  min-width: 350px;
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  background-color: var(--bg-offset);
+}
+
+.pane-loader, .pane-empty {
+  padding: 40px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.job-cards-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Explorer Job Card */
+.job-card-explorer {
+  border-bottom: 1px solid var(--border);
+  padding: 20px 24px;
+  background-color: var(--bg);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+
+.job-card-explorer:hover {
+  background-color: var(--bg-offset);
+}
+
+.job-card-explorer.active {
+  background-color: var(--accent-bg);
+  border-left: 4px solid var(--primary-indigo);
+  padding-left: 20px; /* offset border */
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.card-top h3 {
+  font-size: 16px;
+  margin: 0;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.salary-badge {
+  background-color: rgba(16, 185, 129, 0.12);
+  color: var(--success-hover);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.company-text {
+  font-size: 13px;
+  color: var(--text);
+  margin: 0;
+}
+
+.description-preview {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-meta {
+  display: flex;
+  gap: 15px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.skills-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.skill-mini {
+  background-color: var(--code-bg);
+  color: var(--text);
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* Right Pane: Detail View */
+.right-pane {
+  flex: 1;
+  overflow-y: auto;
+  background-color: var(--bg);
+  padding: 40px;
+  text-align: left;
+}
+
+.detail-empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* Job Detail Panel */
+.job-detail-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-width: 800px;
+}
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 20px;
+  gap: 20px;
+}
+
+.detail-header h2 {
+  font-size: 24px;
+  margin: 0 0 4px 0;
+  color: var(--text-h);
+}
+
+.detail-header h3 {
+  font-size: 16px;
+  color: var(--text);
+  margin: 0 0 12px 0;
+}
+
+.detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.save-bookmark-btn {
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.save-bookmark-btn:hover {
+  background-color: var(--bg-offset);
+  border-color: var(--text-muted);
+}
+
+.save-bookmark-btn.saved {
+  background-color: var(--accent-bg);
+  color: var(--primary-indigo);
+  border-color: var(--accent-border);
+}
+
+/* Body */
+.detail-body {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.detail-body h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.full-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text);
+  white-space: pre-line;
+}
+
+.skill-badge {
+  background-color: var(--code-bg);
+  color: var(--text-h);
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 6px;
+}
+
+/* Footer / Application Form */
+.detail-footer {
+  border-top: 1px solid var(--border);
+  padding-top: 25px;
+}
+
+.guest-apply-banner, .role-apply-banner {
+  background-color: var(--bg-offset);
+  border: 1px dashed var(--border);
+  padding: 20px;
+  border-radius: var(--radius);
+  text-align: center;
+  color: var(--text);
+}
+
+.applied-success-banner {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--success-hover);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  padding: 16px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-align: center;
+}
+
+.apply-form-container {
+  background-color: var(--bg-offset);
+  border: 1px solid var(--border);
+  padding: 24px;
+  border-radius: var(--radius);
+}
+
+.apply-form-container h3 {
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+.quick-apply-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-upload label {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.form-upload input {
+  padding: 10px;
+  border: 1px dashed var(--border);
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+}
+
+.apply-submit-btn {
+  background: linear-gradient(135deg, var(--primary-indigo) 0%, #1d4ed8 100%);
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  align-self: flex-start;
+}
+
+.apply-submit-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+/* Alert styles */
+.error-alert {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--danger-hover);
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.success-alert {
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--success-hover);
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 992px) {
+  .left-pane {
+    width: 100%;
+  }
+  .right-pane {
+    display: none; /* In a full responsive layout, selecting a card would open details as a full screen modal/page, but for dev explorer, keeping left-pane visible */
+  }
+}

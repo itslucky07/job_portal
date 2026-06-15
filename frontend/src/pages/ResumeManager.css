@@ -1,0 +1,263 @@
+/* ResumeManager.css */
+
+.resume-page-layout {
+  display: flex;
+  gap: 40px;
+  padding: 40px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: flex-start;
+  text-align: left;
+}
+
+@media (max-width: 1200px) {
+  .resume-page-layout {
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  .resume-editor-pane, .resume-preview-pane {
+    width: 100%;
+  }
+}
+
+.resume-editor-pane {
+  flex: 1;
+  width: 100%;
+}
+
+.resume-preview-pane {
+  flex: 1.2;
+  position: sticky;
+  top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  width: 100%;
+}
+
+.resume-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  width: 100%;
+}
+
+.resume-card h2 {
+  font-size: 26px;
+  margin-bottom: 5px;
+}
+
+.resume-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.resume-submit-btn {
+  background: linear-gradient(135deg, var(--accent) 0%, #0066ff 100%);
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  padding: 14px 28px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  align-self: flex-start;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+  transition: all 0.2s ease;
+  margin-top: 10px;
+}
+
+.resume-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+}
+
+/* Live Preview Sheet Styling */
+.preview-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+  width: 210mm;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+@media (max-width: 840px) {
+  .preview-header-row {
+    width: 100%;
+    padding: 0 10px;
+  }
+}
+
+.preview-header-row h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.print-pdf-btn {
+  background-color: var(--success-green);
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.print-pdf-btn:hover {
+  opacity: 0.9;
+}
+
+/* Mock A4 Printable Paper */
+.resume-document-sheet {
+  background-color: #ffffff;
+  color: #1e293b;
+  border: 1px solid #cbd5e1;
+  box-shadow: var(--shadow-lg);
+  border-radius: 8px;
+  padding: 20mm 15mm;
+  width: 210mm;
+  height: 297mm;
+  box-sizing: border-box;
+  text-align: left;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+@media (max-width: 840px) {
+  .resume-document-sheet {
+    width: 100%;
+    height: auto;
+    min-height: 297mm;
+    padding: 30px 20px;
+  }
+}
+
+.doc-header {
+  border-bottom: 2px solid #3b82f6;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.doc-header h1 {
+  color: #0f172a;
+  font-size: 28px;
+  font-weight: 800;
+  margin: 0 0 6px 0;
+}
+
+.doc-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 12px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.doc-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.doc-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.section-title {
+  color: #3b82f6;
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 4px;
+}
+
+.section-text {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #334155;
+  margin: 0;
+}
+
+.whitespace-pre {
+  white-space: pre-wrap;
+}
+
+.doc-skills-deck {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.doc-skill-badge {
+  background-color: #eff6ff;
+  color: #1e40af;
+  border: 1px solid #bfdbfe;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.doc-placeholder-text {
+  font-size: 12px;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* Printing Media Query Style Definitions */
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm 20mm;
+  }
+
+  body, html, #root {
+    background-color: #fff !important;
+    color: #000 !important;
+    width: 210mm !important;
+    height: 297mm !important;
+  }
+  
+  nav, .navbar, .no-print, .resume-editor-pane, .preview-header-row {
+    display: none !important;
+  }
+  
+  .resume-page-layout {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 210mm !important;
+  }
+
+  .resume-preview-pane {
+    width: 210mm !important;
+    position: static !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .resume-document-sheet {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    width: 210mm !important;
+    height: 297mm !important;
+    margin: 0 !important;
+    background: transparent !important;
+  }
+}
+

@@ -1,0 +1,223 @@
+/* ApplicantList.css */
+
+.applicants-container {
+  padding: 40px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.applicants-header {
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 20px;
+}
+
+.applicants-header h1 {
+  font-size: 32px;
+  margin: 0;
+}
+
+/* Filter bar styling */
+.filter-bar-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  padding: 14px 24px;
+  border-radius: var(--radius);
+}
+
+.filter-bar-section label {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-h);
+}
+
+.job-filter-select {
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background-color: var(--bg-offset);
+  color: var(--text-h);
+  font-weight: 500;
+  outline: none;
+}
+
+.empty-applicants-state {
+  background-color: var(--bg);
+  border: 1px dashed var(--border);
+  padding: 60px 40px;
+  border-radius: var(--radius);
+  text-align: center;
+  color: var(--text);
+}
+
+/* Applicants Grid */
+.applicants-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+/* Applicant Card design */
+.applicant-card {
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.applicant-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.card-header-app {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status-pill {
+  font-size: 11px;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.status-pill.pending {
+  background-color: rgba(234, 179, 8, 0.12);
+  color: #ca8a04;
+}
+
+.status-pill.accept {
+  background-color: rgba(16, 185, 129, 0.12);
+  color: var(--success-hover);
+}
+
+.status-pill.reject {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--danger-hover);
+}
+
+.app-date {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.card-body-app {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.candidate-name {
+  font-size: 18px;
+  margin: 0;
+  color: var(--text-h);
+}
+
+.applied-position {
+  font-size: 13px;
+  color: var(--text);
+  margin: 0;
+}
+
+.applied-position strong {
+  color: var(--primary-indigo);
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.contact-details p {
+  margin: 0;
+}
+
+.card-actions-app {
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.view-resume-btn {
+  background-color: var(--code-bg);
+  color: var(--text-h);
+  border: 1px solid var(--border);
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  display: block;
+  transition: background-color 0.2s ease;
+}
+
+.view-resume-btn:hover {
+  background-color: var(--border);
+}
+
+.no-resume-badge {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 8px;
+}
+
+.pipeline-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.approve-btn, .reject-btn {
+  flex: 1;
+  border: none;
+  font-weight: bold;
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.approve-btn {
+  background-color: rgba(16, 185, 129, 0.12);
+  color: var(--success-hover);
+}
+
+.approve-btn:hover:not(:disabled) {
+  background-color: var(--success-green);
+  color: #fff;
+}
+
+.reject-btn {
+  background-color: rgba(239, 68, 68, 0.08);
+  color: var(--danger-red);
+}
+
+.reject-btn:hover:not(:disabled) {
+  background-color: var(--danger-red);
+  color: #fff;
+}
+
+.approve-btn:disabled, .reject-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

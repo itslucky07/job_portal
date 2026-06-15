@@ -1,0 +1,264 @@
+/* StudentDashboard.css */
+
+.student-container {
+  padding: 40px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.student-header {
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 20px;
+}
+
+.student-header h1 {
+  font-size: 32px;
+  margin: 0;
+}
+
+/* Tab Switching Header */
+.tabs-header {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  gap: 10px;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: bold;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+  color: var(--text-h);
+}
+
+.tab-btn.active {
+  color: var(--primary-indigo);
+  border-bottom-color: var(--primary-indigo);
+}
+
+/* Tab Body Panels */
+.tab-body {
+  margin-top: 10px;
+}
+
+.empty-tab-state {
+  background-color: var(--bg);
+  border: 1px dashed var(--border);
+  padding: 60px 40px;
+  border-radius: var(--radius);
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* Profile Form styling */
+.profile-tab-section {
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  padding: 30px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-tab-section h2 {
+  font-size: 20px;
+  margin: 0;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+}
+
+.profile-grid-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-row-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.form-files-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .form-files-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.student-save-btn {
+  background-color: var(--text-h);
+  color: var(--bg);
+  border: none;
+  font-weight: bold;
+  padding: 12px 24px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  align-self: flex-start;
+  margin-top: 10px;
+}
+
+/* Form field constraints to prevent card overflow */
+.form-group-sm {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.form-group-sm label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-h);
+  text-align: left;
+}
+
+.form-group-sm input, .form-group-sm select {
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background-color: var(--bg);
+  color: var(--text-h);
+  font-size: 13px;
+  outline: none;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  transition: border-color 0.2s ease;
+}
+
+.form-group-sm input:focus, .form-group-sm select:focus {
+  border-color: var(--accent) !important;
+}
+
+.student-save-btn:hover {
+  opacity: 0.9;
+}
+
+/* Applied Jobs Deck */
+.applications-list-deck, .saved-jobs-deck {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.app-status-card, .saved-job-card {
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.app-status-card-header, .saved-job-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-status-card-header h3, .saved-job-card-header h3 {
+  font-size: 16px;
+  margin: 0;
+  color: var(--text-h);
+}
+
+.company-tag {
+  font-size: 13px;
+  color: var(--text);
+  margin: 0;
+}
+
+.details-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.unsave-btn {
+  background: none;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: var(--danger-red);
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.unsave-btn:hover {
+  background-color: var(--danger-red);
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .student-container {
+    padding: 20px 16px;
+    gap: 20px;
+  }
+  
+  .profile-tab-section {
+    padding: 24px 16px;
+  }
+  
+  .form-row-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .student-save-btn {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .tabs-header {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    border-bottom: 2px solid var(--border);
+    gap: 5px;
+  }
+  
+  .tabs-header::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .tab-btn {
+    padding: 10px 16px;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+}
+
+/* Fix file input borders and padding inside form group */
+.form-group-sm input[type="file"] {
+  border: none !important;
+  padding: 8px 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}

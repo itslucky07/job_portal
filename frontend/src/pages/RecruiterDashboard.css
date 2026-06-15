@@ -1,0 +1,405 @@
+/* RecruiterDashboard.css */
+
+.recruiter-container {
+  padding: 40px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.recruiter-header {
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 20px;
+}
+
+.recruiter-header h1 {
+  font-size: 32px;
+  margin: 0;
+}
+
+/* Stats Row */
+.stats-row {
+  display: flex;
+  gap: 20px;
+}
+
+.stat-card {
+  flex: 1;
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-value {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--primary-indigo);
+}
+
+.stat-label {
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--text-muted);
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
+
+@media (max-width: 992px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  .stats-row {
+    flex-direction: column;
+  }
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-header h2 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.btn-primary-sm {
+  background-color: var(--primary-indigo);
+  color: #fff;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.btn-primary-sm:hover {
+  background-color: var(--primary-hover);
+  color: #fff;
+}
+
+.empty-table-state {
+  background-color: var(--bg);
+  border: 1px dashed var(--border);
+  padding: 40px;
+  border-radius: var(--radius);
+  text-align: center;
+  color: var(--text);
+}
+
+.btn-link {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/* Dashboard Table styling */
+.table-responsive {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--bg);
+}
+
+.dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.dashboard-table th, .dashboard-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.dashboard-table th {
+  background-color: var(--bg-offset);
+  color: var(--text-h);
+  font-weight: bold;
+}
+
+.dashboard-table td strong {
+  display: block;
+  font-size: 15px;
+  color: var(--text-h);
+}
+
+.table-subtext {
+  display: block;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.action-buttons-row {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-action-btn, .delete-action-btn {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.edit-action-btn {
+  background-color: var(--accent-bg);
+  color: var(--primary-indigo);
+  border-color: var(--accent-border);
+}
+
+.edit-action-btn:hover {
+  background-color: var(--primary-indigo);
+  color: #fff;
+}
+
+.delete-action-btn {
+  background-color: rgba(239, 68, 68, 0.08);
+  color: var(--danger-red);
+  border-color: rgba(239, 68, 68, 0.2);
+}
+
+.delete-action-btn:hover {
+  background-color: var(--danger-red);
+  color: #fff;
+}
+
+/* Profile Form Section */
+.profile-form-section {
+  background-color: var(--bg);
+  border: 1px solid var(--border);
+  padding: 30px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-form-section h2 {
+  font-size: 20px;
+  margin: 0;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group-sm {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group-sm label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.form-group-sm input, .form-group-sm select {
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background-color: var(--bg);
+  color: var(--text-h);
+  font-size: 13px;
+  outline: none;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.form-group-sm input:focus, .form-group-sm select:focus {
+  border-color: var(--accent);
+}
+
+.profile-save-btn {
+  background-color: var(--text-h);
+  color: var(--bg);
+  border: none;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  margin-top: 10px;
+}
+
+/* Tab switcher styling */
+.tabs-header {
+  display: flex;
+  gap: 10px;
+  border-bottom: 2px solid var(--border);
+  margin-top: 10px;
+  overflow-x: auto;
+}
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  color: var(--text-h);
+}
+
+.tab-btn.active {
+  color: var(--primary-indigo);
+  border-bottom-color: var(--primary-indigo);
+}
+
+/* Status pills */
+.status-pill {
+  font-size: 11px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.status-pill.pending {
+  background-color: rgba(234, 179, 8, 0.12);
+  color: #ca8a04;
+}
+
+.status-pill.accept {
+  background-color: rgba(16, 185, 129, 0.12);
+  color: var(--success-hover);
+}
+
+.status-pill.reject {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--danger-hover);
+}
+
+/* Pipeline button actions */
+.pipeline-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.approve-btn, .reject-btn {
+  border: none;
+  font-weight: bold;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.approve-btn {
+  background-color: rgba(16, 185, 129, 0.12);
+  color: var(--success-hover);
+}
+
+.approve-btn:hover:not(:disabled) {
+  background-color: var(--success-green);
+  color: #fff;
+}
+
+.reject-btn {
+  background-color: rgba(239, 68, 68, 0.08);
+  color: var(--danger-red);
+}
+
+.reject-btn:hover:not(:disabled) {
+  background-color: var(--danger-red);
+  color: #fff;
+}
+
+.approve-btn:disabled, .reject-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.view-resume-btn {
+  background-color: var(--code-bg);
+  color: var(--text-h);
+  border: 1px solid var(--border);
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 4px;
+  display: inline-block;
+  transition: background-color 0.2s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.view-resume-btn:hover {
+  background-color: var(--border);
+}
+
+.no-resume-badge {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.filter-bar-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.job-filter-select {
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background-color: var(--bg);
+  color: var(--text-h);
+  font-size: 13px;
+  font-weight: 500;
+  outline: none;
+}
+
+/* Fix file input borders and padding inside form group */
+.form-group-sm input[type="file"] {
+  border: none !important;
+  padding: 8px 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.profile-save-btn:hover {
+  opacity: 0.9;
+}
