@@ -382,7 +382,7 @@ const RecruiterDashboard = () => {
               </div>
               <div className="form-group-sm">
                 <label>Replace Logo</label>
-                <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
+                <input type="file" className="form-file-input" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
               </div>
               <button type="submit" className="profile-save-btn" disabled={updating}>
                 {updating ? 'Saving Changes...' : 'Update Details'}

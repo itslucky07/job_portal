@@ -174,6 +174,7 @@ const RegisterRecruiter = () => {
               <input
                 type="file"
                 id="image"
+                className="form-file-input"
                 accept="image/*"
                 onChange={handleFileChange}
               />

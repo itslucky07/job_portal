@@ -145,11 +145,11 @@ const StudentDashboard = () => {
               <div className="form-files-row">
                 <div className="form-group-sm">
                   <label>Upload Photo</label>
-                  <input type="file" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
+                  <input type="file" className="form-file-input" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
                 </div>
                 <div className="form-group-sm">
                   <label>Upload Resume PDF</label>
-                  <input type="file" accept=".pdf" onChange={(e) => setResumePdf(e.target.files[0])} />
+                  <input type="file" className="form-file-input" accept=".pdf" onChange={(e) => setResumePdf(e.target.files[0])} />
                 </div>
               </div>
 

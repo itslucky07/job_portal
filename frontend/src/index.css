@@ -145,13 +145,16 @@ input, select, textarea {
 }
 
 /* Global clean-up override for file inputs */
-input[type="file"] {
+input[type="file"],
+.form-file-input {
   border: none !important;
   padding: 8px 0 !important;
   background: transparent !important;
+  background-color: transparent !important;
   box-shadow: none !important;
+  width: 100% !important;
   max-width: 100% !important;
   box-sizing: border-box !important;
-  color: var(--text-muted);
+  color: var(--text-muted) !important;
 }
 
