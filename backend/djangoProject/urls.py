@@ -19,11 +19,31 @@ from django.urls import path, include, re_path
 from django.views.generic import TemplateView
 from django.conf.urls.static import static
 from django.conf import settings
+from django.http import JsonResponse
+
+def api_home(request):
+    return JsonResponse({
+        "status": "success",
+        "message": "Job Portal API is running. Access API endpoints at /api/ and admin panel at /admin/"
+    })
+
+# Check if index.html exists in the frontend dist folder
+frontend_index = settings.BASE_DIR.parent / 'frontend' / 'dist' / 'index.html'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('jobportal.api_urls')),
-    
-    # Catch-all pattern to route all frontend requests to React SPA except admin/, api/, static/, and media/
-    re_path(r'^(?!admin/)(?!api/)(?!static/)(?!media/).*$', TemplateView.as_view(template_name='index.html'), name='frontend'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+if frontend_index.exists():
+    # Local development catch-all
+    urlpatterns.append(
+        re_path(r'^(?!admin/)(?!api/)(?!static/)(?!media/).*$', TemplateView.as_view(template_name='index.html'), name='frontend')
+    )
+else:
+    # Production fallback: serve simple JSON status on root
+    urlpatterns.append(
+        re_path(r'^$', api_home, name='api_home')
+    )
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
