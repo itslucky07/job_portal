@@ -1,6 +1,9 @@
 import axios from 'axios';
 
 const getBaseURL = () => {
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL;
+  }
   const host = window.location.hostname;
   const port = window.location.port;
   // If running on React dev server, route to backend port 8000
